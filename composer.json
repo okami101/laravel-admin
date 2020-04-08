@@ -1,0 +1,57 @@
+{
+    "name": "vtec/crud",
+    "description": "",
+    "keywords": [
+        "vtec",
+        "vtec-crud"
+    ],
+    "homepage": "https://github.com/adr1enbe4udou1n/vtec-crud",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adrien Beaudouin",
+            "email": "adrien.beaudouin@outlook.com",
+            "homepage": "https://okami101.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "symfony/var-dumper": "^4.3",
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vtec\\Skeleton\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vtec\\Skeleton\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vtec\\Skeleton\\SkeletonServiceProvider"
+            ],
+            "aliases": {
+                "Skeleton": "Vtec\\Skeleton\\SkeletonFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
