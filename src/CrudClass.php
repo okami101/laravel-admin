@@ -1,11 +1,11 @@
 <?php
 
-namespace Vtec\Skeleton;
+namespace Vtec\Crud;
 
-class SkeletonClass
+class CrudClass
 {
     /**
-     * Create a new Skeleton Instance.
+     * Create a new Crud Instance.
      */
     public function __construct()
     {

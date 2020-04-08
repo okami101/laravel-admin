@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Vtec\\Skeleton\\": "src"
+            "Vtec\\Crud\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vtec\\Skeleton\\Tests\\": "tests"
+            "Vtec\\Crud\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -45,10 +45,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Vtec\\Skeleton\\SkeletonServiceProvider"
+                "Vtec\\Crud\\CrudServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Vtec\\Skeleton\\SkeletonFacade"
+                "Crud": "Vtec\\Crud\\CrudFacade"
             }
         }
     },

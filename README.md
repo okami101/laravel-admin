@@ -24,8 +24,8 @@ composer require adr1enbe4udou1n/vtec-crud
 ## Usage
 
 ``` php
-$skeleton = new Vtec\Skeleton();
-echo $skeleton->echoPhrase('Hello, Vtec!');
+$crud = new Vtec\Crud();
+echo $crud->echoPhrase('Hello, Vtec!');
 ```
 
 ## Testing

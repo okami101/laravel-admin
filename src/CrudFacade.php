@@ -1,13 +1,13 @@
 <?php
 
-namespace Vtec\Skeleton;
+namespace Vtec\Crud;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Vtec\Skeleton\SkeletonClass
+ * @see \Vtec\Crud\CrudClass
  */
-class SkeletonFacade extends Facade
+class CrudFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class SkeletonFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'skeleton';
+        return 'crud';
     }
 }

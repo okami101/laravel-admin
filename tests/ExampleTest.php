@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Skeleton\Tests;
+namespace Vtec\Crud\Tests;
 
 use PHPUnit\Framework\TestCase;
 
