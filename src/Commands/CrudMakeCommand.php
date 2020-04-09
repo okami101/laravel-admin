@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Commands;
+namespace Vtec\Crud\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
@@ -14,7 +14,7 @@ class CrudMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:crud';
+    protected $name = 'crud:make';
 
     /**
      * The console command description.

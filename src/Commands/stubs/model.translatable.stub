@@ -2,8 +2,8 @@
 
 namespace {{ namespace }};
 
-use App\ModelTraits\RequestTranslatableTrait;
 use Illuminate\Database\Eloquent\Model;
+use Vtec\Crud\Traits\RequestTranslatableTrait;
 
 class {{ class }} extends Model
 {

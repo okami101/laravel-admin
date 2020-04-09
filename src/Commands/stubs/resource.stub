@@ -2,6 +2,8 @@
 
 namespace {{ namespace }};
 
+use Vtec\Crud\Http\Resources\BaseResource;
+
 class {{ model }} extends BaseResource
 {
     /**

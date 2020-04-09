@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\QueryBuilder\QueryBuilder;
+use Vtec\Crud\Commands\CrudGeneratorCommand;
+use Vtec\Crud\Commands\CrudMakeCommand;
 
 class CrudServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,13 @@ class CrudServiceProvider extends ServiceProvider
                 __DIR__.'/../config/crud.php' => config_path('crud.php'),
             ], 'config');
 
+            $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'crud');
+
+            $this->commands([
+                CrudMakeCommand::class,
+                CrudGeneratorCommand::class,
+            ]);
+
             /*
             $this->loadViewsFrom(__DIR__.'/../resources/views', 'crud');
 
@@ -27,8 +36,6 @@ class CrudServiceProvider extends ServiceProvider
             ], 'views');
             */
         }
-
-        $this->loadTranslationsFrom(__DIR__.'/path/to/translations', 'crud');
 
         Validator::extend('current_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, auth()->user()->password);

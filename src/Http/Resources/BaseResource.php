@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Http\Resources;
+namespace Vtec\Crud\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;

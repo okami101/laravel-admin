@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Faker\Provider;
+namespace Vtec\Crud\Faker\Provider;
 
 use Faker\Generator;
 use Faker\Provider\Base;

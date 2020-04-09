@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Commands;
+namespace Vtec\Crud\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

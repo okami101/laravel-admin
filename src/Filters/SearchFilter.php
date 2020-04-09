@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Filters;
+namespace Vtec\Crud\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\QueryBuilder\Filters\Filter;

@@ -3,12 +3,12 @@
 namespace {{ namespace }};
 
 use {{ namespacedModel }};
-use App\Http\Filters\SearchFilter;
 use App\Http\Requests\Store{{ model }};
 use App\Http\Requests\Update{{ model }};
 use App\Http\Resources\{{ model }} as {{ model }}Resource;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Vtec\Crud\Filters\SearchFilter;
 
 class {{ class }} extends Controller
 {
