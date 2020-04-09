@@ -54,6 +54,6 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'crud');
+        $this->mergeConfigFrom(__DIR__.'/../config/crud.php', 'crud');
     }
 }
