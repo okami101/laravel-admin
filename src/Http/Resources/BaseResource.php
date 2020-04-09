@@ -30,8 +30,9 @@ class BaseResource extends JsonResource
                     request()->get('locale') ?: app()->getLocale()
                 );
 
-                if (!empty($translated)) {
+                if (! empty($translated)) {
                     $attributes[$field] = $translated;
+
                     return;
                 }
                 $attributes[$field] = null;
@@ -41,7 +42,7 @@ class BaseResource extends JsonResource
         /**
          * Media API generator only if media included
          */
-        if (!empty($attributes['media']) && $this->resource instanceof HasMedia) {
+        if (! empty($attributes['media']) && $this->resource instanceof HasMedia) {
             $this->resource->registerMediaCollections();
 
             /** @var MediaCollection $collection */
@@ -53,6 +54,7 @@ class BaseResource extends JsonResource
                     foreach ($media as $file) {
                         $attributes[$collection->name][] = $this->getVersions($file);
                     }
+
                     return;
                 }
 
@@ -73,7 +75,7 @@ class BaseResource extends JsonResource
             'id' => $file->id,
             'name' => $file->name,
             'file_name' => $file->file_name,
-            'url' => $file->getFullUrl()
+            'url' => $file->getFullUrl(),
         ];
 
         $conversions = $file->getMediaConversionNames();
@@ -81,6 +83,7 @@ class BaseResource extends JsonResource
         $attributes['thumbnails'] = collect($conversions)->mapWithKeys(function ($c) use ($file) {
             return [$c => $file->getFullUrl($c)];
         })->toArray();
+
         return $attributes;
     }
 }

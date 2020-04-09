@@ -54,7 +54,7 @@ class CrudMakeCommand extends GeneratorCommand
         ],
         'Resource' => [
             'stub' => 'resource',
-            'namespace' => '\Http\Resources'
+            'namespace' => '\Http\Resources',
         ],
     ];
 
@@ -101,13 +101,13 @@ class CrudMakeCommand extends GeneratorCommand
             /**
              * Take specific stubs
              */
-            if (!$this->isMediable() && $this->isTranslatable()) {
+            if (! $this->isMediable() && $this->isTranslatable()) {
                 $stub .= '.translatable';
             }
-            if ($this->isMediable() && !$this->isTranslatable()) {
+            if ($this->isMediable() && ! $this->isTranslatable()) {
                 $stub .= '.mediable';
             }
-            if (!$this->isMediable() && !$this->isTranslatable()) {
+            if (! $this->isMediable() && ! $this->isTranslatable()) {
                 $stub .= '.plain';
             }
         }
@@ -154,12 +154,12 @@ class CrudMakeCommand extends GeneratorCommand
 
     private function isMediable()
     {
-        return !empty($this->option('mediable'));
+        return ! empty($this->option('mediable'));
     }
 
     private function isTranslatable()
     {
-        return !empty($this->option('translatable'));
+        return ! empty($this->option('translatable'));
     }
 
     /**
@@ -201,6 +201,7 @@ class CrudMakeCommand extends GeneratorCommand
     {
         return collect($this->option('fields'))->mapWithKeys(function ($field) {
             $segments = explode(':', $field);
+
             return [$segments[0] => $segments[1]];
         });
     }
@@ -223,6 +224,7 @@ class CrudMakeCommand extends GeneratorCommand
     {
         return collect($this->option('mediable'))->mapWithKeys(function ($field) {
             $segments = explode(':', $field);
+
             return [$segments[0] => $segments[1]];
         });
     }
@@ -242,12 +244,13 @@ class CrudMakeCommand extends GeneratorCommand
                 'collection',
                 'date',
                 'datetime',
-                'timestamp'
+                'timestamp',
             ]);
         })->map(function ($type) {
             if ($type === 'decimal') {
                 return "$type:2";
             }
+
             return $type;
         });
     }
@@ -256,9 +259,10 @@ class CrudMakeCommand extends GeneratorCommand
     {
         return collect($array)->map(function ($multiple, $collection) {
             $line = "\$this->addMediaCollection('$collection')";
-            if (!$multiple) {
+            if (! $multiple) {
                 $line .= '->singleFile()';
             }
+
             return "$line;";
         })->implode("\n        ");
     }

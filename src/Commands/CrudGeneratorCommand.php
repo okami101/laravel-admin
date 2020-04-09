@@ -99,9 +99,11 @@ class CrudGeneratorCommand extends Command
     {
         return collect($resource['fields'])->filter(function ($field) {
             $type = $field['type'] ?? 'string';
-            return !in_array($type, ['file', 'image']);
+
+            return ! in_array($type, ['file', 'image']);
         })->map(function ($field, $name) {
             $type = $field['type'] ?? 'string';
+
             return "$name:$type";
         })->values();
     }
@@ -112,6 +114,7 @@ class CrudGeneratorCommand extends Command
             if ($filter) {
                 return $field[$filter] ?? false;
             }
+
             return true;
         })->keys();
     }
@@ -120,9 +123,11 @@ class CrudGeneratorCommand extends Command
     {
         return collect($resource['fields'])->filter(function ($field) {
             $type = $field['type'] ?? 'string';
+
             return in_array($type, ['file', 'image']);
         })->map(function ($field, $name) {
             $multiple = $field['multiple'] ?? false;
+
             return "$name:$multiple";
         })->values();
     }

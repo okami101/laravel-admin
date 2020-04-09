@@ -16,7 +16,7 @@ class CrudServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('crud.php'),
+                __DIR__.'/../config/crud.php' => config_path('crud.php'),
             ], 'config');
 
             /*
@@ -44,6 +44,7 @@ class CrudServiceProvider extends ServiceProvider
                     ->paginate(request()->get('perPage'))
                     ->appends(request()->query());
             }
+
             return $this->get();
         });
     }
