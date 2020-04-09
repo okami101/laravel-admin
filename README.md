@@ -18,7 +18,27 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require adr1enbe4udou1n/vtec-crud
+composer require vtec/crud
+```
+
+## Deps used
+
+[spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary)
+[spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder)
+[spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable)
+[symfony/yaml](https://github.com/symfony/Yaml/)
+
+## Other recommended packages for admin
+
+```bash
+composer require laravel/ui laravel/sanctum doctrine/dbal itsgoingd/clockwork barryvdh/laravel-elfinder
+php artisan ui:auth
+```
+
+## Recommended dev packages
+
+```bash
+composer require barryvdh/laravel-ide-helper friendsofphp/php-cs-fixer --dev
 ```
 
 ## Usage
