@@ -33,6 +33,25 @@ composer require vtec/crud
 ```bash
 composer require laravel/ui laravel/sanctum doctrine/dbal itsgoingd/clockwork barryvdh/laravel-elfinder
 php artisan ui:auth
+php artisan elfinder:publish
+
+php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
+php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
+
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+> Optional : remove migration
+```
+
+```
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+
+'api' => [
+    EnsureFrontendRequestsAreStateful::class,
+    'throttle:60,1',
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+],
+
+>> cors
 ```
 
 ## Recommended dev packages
