@@ -10,8 +10,8 @@ use Vtec\Crud\Traits\RequestTranslatableTrait;
 
 class {{ class }} extends Model implements HasMedia
 {
-    use RequestTranslatableTrait;
     use RequestMediaTrait;
+    use RequestTranslatableTrait;
 
     protected $fillable = [{{ fields }}];
 

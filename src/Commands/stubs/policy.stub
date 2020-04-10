@@ -10,11 +10,6 @@ class {{ class }}
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
-    {
-        return $user->hasRole('admin');
-    }
-
     /**
      * Determine whether the user can view any {{ modelVariable }}s.
      */

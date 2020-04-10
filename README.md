@@ -19,7 +19,18 @@ You can install the package via composer:
 
 ```bash
 composer require vtec/crud
+
+php artisan crud:install ??
+
+php artisan vendor:publish --provider='Vtec\Crud\CrudServiceProvider' --tag="config"
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
+
+Change return route('login'); on Authenticate to return route('admin.url');
+
+Docker ??
 ```
+
+> Env variables : ADMIN_URL
 
 ## Deps used
 
@@ -37,6 +48,7 @@ php artisan elfinder:publish
 
 php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
 php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
+> Only TinyMCE5 required
 
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 > Optional : remove migration
@@ -59,23 +71,6 @@ use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 ```bash
 composer require barryvdh/laravel-ide-helper friendsofphp/php-cs-fixer laracasts/generators --dev
 ```
-
-```bash
-[--model=0]
-php artisan make:migration:schema create_users_table --schema="username:string, email:string:unique"
-php artisan make:migration:schema remove_user_id_from_posts_table --schema="user_id:integer"
-php artisan make:migration:schema create_posts_table --schema="title:string, body:text, excerpt:string:nullable"
-php artisan make:migration:schema remove_excerpt_from_posts_table --schema="excerpt:string:nullable"
-php artisan make:migration:schema create_posts_table --schema="user_id:unsignedInteger:foreign, title:string, body:text"
-php artisan make:migration:pivot tags posts
-```
-
-username:string
-body:text
-age:integer
-published_at:date
-excerpt:text:nullable
-email:string:unique:default('foo@example.com')
 
 ## Usage
 

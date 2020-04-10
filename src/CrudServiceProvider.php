@@ -21,29 +21,25 @@ class CrudServiceProvider extends ServiceProvider
                 __DIR__.'/../config/admin.php' => config_path('admin.php'),
             ], 'config');
 
-            $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'crud');
+            $this->publishes([
+                __DIR__.'/../resources/lang' => resource_path('lang/vendor/crud'),
+            ]);
 
             $this->commands([
                 CrudMakeCommand::class,
                 CrudGeneratorCommand::class,
             ]);
-
-            /*
-            $this->loadViewsFrom(__DIR__.'/../resources/views', 'crud');
-
-            $this->publishes([
-                __DIR__.'/../resources/views' => base_path('resources/views/vendor/crud'),
-            ], 'views');
-            */
         }
+
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
 
         Validator::extend('current_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, auth()->user()->password);
-        }, __('crud.validation.mismatch_password'));
+        }, __('crud::validation.mismatch_password'));
 
         Validator::extend('strong_password', function ($attribute, $value, $parameters, $validator) {
             return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', (string) $value);
-        }, __('crud.validation.strong_password'));
+        }, __('crud::validation.strong_password'));
 
         QueryBuilder::macro('exportOrPaginate', function () {
             if (request()->get('perPage')) {

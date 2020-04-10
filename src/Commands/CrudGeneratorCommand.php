@@ -58,29 +58,24 @@ class CrudGeneratorCommand extends Command
      */
     public function handle()
     {
-        $dir = $this->argument('path');
+        $input = $this->argument('file');
 
-        /**
-         * Parse all yaml files
-         */
-        foreach ($this->files->files($dir) as $file) {
-            $descriptor = Yaml::parseFile($file);
-
-            foreach ($descriptor as $resource) {
-                $this->call('make:crud', [
-                    'name' => $resource['model'],
-                    '--fields' => $this->getFields($resource),
-                    '--translatable' => $this->getFieldNames($resource, 'translatable'),
-                    '--searchable' => $this->getFieldNames($resource, 'searchable'),
-                    '--sortable' => $this->getFieldNames($resource, 'sortable'),
-                    '--mediable' => $this->getMediableFields($resource),
-                    '--force' => $this->option('force'),
-                    '--migration' => $this->option('migration'),
-                    '--factory' => $this->option('factory'),
-                    '--seed' => $this->option('seed'),
-                ]);
-            }
+        if ($this->files->isFile($input)) {
+            $this->loadFileDescriptor($input);
+            return;
         }
+
+        if ($this->files->isDirectory($input)) {
+            /**
+             * Parse all yaml files
+             */
+            foreach ($this->files->files($input) as $file) {
+                $this->loadFileDescriptor($file);
+            }
+            return;
+        }
+
+        $this->error('Invalid input !');
     }
 
     /**
@@ -91,20 +86,76 @@ class CrudGeneratorCommand extends Command
     protected function getArguments()
     {
         return [
-            ['path', InputArgument::OPTIONAL, 'The directory which contains YML descriptors', base_path('generators')],
+            ['file', InputArgument::REQUIRED, 'The YAML file descriptor or the directory which contains YAML descriptors'],
         ];
     }
 
-    private function getFields($resource)
+    private function loadFileDescriptor($file)
+    {
+        $descriptor = Yaml::parseFile($file);
+
+        foreach ($descriptor as $name => $resource) {
+            $this->call('crud:make', [
+                'name' => $resource['model'],
+                '--fields' => $this->getFields($resource),
+                '--translatable' => $this->getFieldNames($resource, 'translatable'),
+                '--searchable' => $this->getFieldNames($resource, 'searchable'),
+                '--sortable' => $this->getFieldNames($resource, 'sortable'),
+                '--mediable' => $this->getMediableFields($resource),
+                '--force' => $this->option('force'),
+                '--factory' => $this->option('factory'),
+                '--seed' => $this->option('seed'),
+            ]);
+
+            if ($this->option('migration')) {
+                $this->call('make:migration:schema', [
+                    'name' => "create_{$name}_table",
+                    '--model' => false,
+                    '--schema' => $this->getFieldSchemas($resource)->implode(', '),
+                ]);
+            }
+        }
+    }
+
+    private function getDatabaseFields($resource)
     {
         return collect($resource['fields'])->filter(function ($field) {
             $type = $field['type'] ?? 'string';
 
             return ! in_array($type, ['file', 'image']);
-        })->map(function ($field, $name) {
+        });
+    }
+
+    private function getFields($resource)
+    {
+        return $this->getDatabaseFields($resource)->map(function ($field, $name) {
             $type = $field['type'] ?? 'string';
 
             return "$name:$type";
+        })->values();
+    }
+
+    private function getFieldSchemas($resource)
+    {
+        return $this->getDatabaseFields($resource)->map(function ($field, $name) {
+            $type = $field['type'] ?? 'string';
+
+            $schema = "$name:$type";
+
+            if ($field['required'] ?? true) {
+                $schema .= ':nullable';
+            }
+
+            /**
+             * Specific database attribute
+             */
+            if (!empty($field['db'])) {
+                foreach($field['db'] as $attribute) {
+                    $schema .= ":$attribute";
+                }
+            }
+
+            return $schema;
         })->values();
     }
 
