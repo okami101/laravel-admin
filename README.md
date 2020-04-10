@@ -22,12 +22,16 @@ composer require vtec/crud
 
 php artisan crud:install ??
 
-php artisan vendor:publish --provider='Vtec\Crud\CrudServiceProvider' --tag="config"
-php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider='Vtec\Crud\CrudServiceProvider' --tag=config
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag=migrations
 
 Change return route('login'); on Authenticate to return route('admin.url');
 
 Docker ??
+AccountController ??
+
+laravel/sanctum ??
+barryvdh/laravel-elfinder ??
 ```
 
 > Env variables : ADMIN_URL
@@ -42,7 +46,7 @@ Docker ??
 ## Other recommended packages for admin
 
 ```bash
-composer require laravel/ui laravel/sanctum doctrine/dbal itsgoingd/clockwork barryvdh/laravel-elfinder
+composer require laravel/ui itsgoingd/clockwork
 php artisan ui:auth
 php artisan elfinder:publish
 
@@ -50,8 +54,7 @@ php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider
 php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
 > Only TinyMCE5 required
 
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-> Optional : remove migration
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" --tag=config
 ```
 
 ```
