@@ -18,7 +18,7 @@ class CrudServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/crud.php' => config_path('crud.php'),
+                __DIR__.'/../config/admin.php' => config_path('admin.php'),
             ], 'config');
 
             $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'crud');
@@ -61,6 +61,6 @@ class CrudServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/crud.php', 'crud');
+        $this->mergeConfigFrom(__DIR__.'/../config/admin.php', 'admin');
     }
 }
