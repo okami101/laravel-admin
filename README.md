@@ -38,8 +38,25 @@ php artisan ui:auth
 ## Recommended dev packages
 
 ```bash
-composer require barryvdh/laravel-ide-helper friendsofphp/php-cs-fixer --dev
+composer require barryvdh/laravel-ide-helper friendsofphp/php-cs-fixer laracasts/generators --dev
 ```
+
+```bash
+[--model=0]
+php artisan make:migration:schema create_users_table --schema="username:string, email:string:unique"
+php artisan make:migration:schema remove_user_id_from_posts_table --schema="user_id:integer"
+php artisan make:migration:schema create_posts_table --schema="title:string, body:text, excerpt:string:nullable"
+php artisan make:migration:schema remove_excerpt_from_posts_table --schema="excerpt:string:nullable"
+php artisan make:migration:schema create_posts_table --schema="user_id:unsignedInteger:foreign, title:string, body:text"
+php artisan make:migration:pivot tags posts
+```
+
+username:string
+body:text
+age:integer
+published_at:date
+excerpt:text:nullable
+email:string:unique:default('foo@example.com')
 
 ## Usage
 
