@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
+use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 
 class CrudInstallCommand extends Command
 {
@@ -45,13 +46,13 @@ class CrudInstallCommand extends Command
      */
     public function handle()
     {
-        $dependencies = ['laravel/ui'];
+        /*$dependencies = ['laravel/ui'];
         $devDependencies = ['laracasts/generators'];
 
         if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (mandatory for sanctum provider) ?', true)) {
             $dependencies[] = 'laravel/sanctum';
         }
-        if ($installLaravelElfinder = $this->confirm('Install barryvdh/laravel-elfinder to provide an admin interface for File Management ?', true)) {
+        if ($installLaravelElfinder = $this->confirm('Install barryvdh/laravel-elfinder to provide an admin interface for File Management ?')) {
             $dependencies[] = 'barryvdh/laravel-elfinder';
         }
         if ($installLaravelClockwork = $this->confirm('Install itsgoingd/clockwork to provide debugging and profiling ?', true)) {
@@ -66,40 +67,46 @@ class CrudInstallCommand extends Command
 
         $this->installDependencies($dependencies);
         $this->installDependencies($devDependencies, true);
-        $this->updateDependencies();
+        $this->updateDependencies();*/
 
-        /*$this->changeAuthenticateRedirect();
+        $installLaravelSanctum = true;
+        $installLaravelElfinder = true;
+        $installLaravelClockwork = true;
+        $installLaravelIdeHelper = true;
+        $installPhpCsFixer = true;
 
+        $this->configureLaravelMediaLibrary();
+        $this->changeAuthenticationRedirect();
         $this->addAuthentificationControllers();
         $this->addAccountController();
 
         if ($installLaravelSanctum) {
-            $this->installLaravelSanctum();
+            $this->configureLaravelSanctum();
         }
 
         if ($installLaravelElfinder) {
-            $this->installLaravelElfinder();
+            $this->configureLaravelElfinder();
         }
 
         if ($installLaravelClockwork) {
-            $this->installLaravelClockwork();
+            $this->configureLaravelClockwork();
         }
 
         if ($installLaravelIdeHelper) {
-            $this->installLaravelIdeHelper();
+            $this->configureLaravelIdeHelper();
         }
 
         if ($installPhpCsFixer) {
-            $this->installPhpCsFixer();
+            $this->configurePhpCsFixer();
         }
 
-        if ($this->confirm('Remove package.json and Laravel Mix (no need if you use frontend framework as Nuxt.js) ?')) {
-            $this->removeLaravelMix();
-        }
+        //if ($this->confirm('Remove all assets files (no need if you use frontend framework as Nuxt.js) ?')) {
+            $this->removeAssets();
+        //}
 
-        if ($this->confirm('Install Docker files ?', true)) {
-            $this->installDocker();
-        }*/
+        //if ($this->confirm('Install Docker files ?', true)) {
+            $this->addDockerfiles();
+        //}
     }
 
     /**
@@ -107,9 +114,9 @@ class CrudInstallCommand extends Command
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    private function changeAuthenticateRedirect()
+    private function changeAuthenticationRedirect()
     {
-        $this->line('Replace default redirect');
+        $this->line('Change default authentication redirect');
 
         $file = app_path('Http/Middleware/Authenticate.php');
         $content = $this->files->get($file);
@@ -119,47 +126,89 @@ class CrudInstallCommand extends Command
 
     private function addAuthentificationControllers()
     {
-
+        $this->line('Add authentification controllers');
+        $this->call('ui:controllers');
     }
 
     private function addAccountController()
     {
-
+        $this->line('Add account controller');
+        $this->files->copy(__DIR__ . '/../../files/.php_cs.dist', app_path('Http/Controllers'));
+        $this->files->copy(__DIR__ . '/../../files/.php_cs.dist', app_path('.php_cs.dist'));
     }
 
-    private function installLaravelSanctum()
+    private function configureLaravelMediaLibrary()
     {
-
+        $this->line('Configure Laravel Media Library');
+        $this->call('vendor:publish', [
+            '--provider' => MediaLibraryServiceProvider::class,
+            '--tag' => ['config', 'migrations']
+        ]);
     }
 
-    private function installLaravelElfinder()
+    private function configureLaravelSanctum()
     {
-        $this->line('Installing barryvdh/laravel-elfinder');
+        $this->line('Configure Laravel Sanctum');
+        $this->call('vendor:publish', [
+            '--provider' => 'Laravel\Sanctum\SanctumServiceProvider',
+            '--tag' => 'sanctum-config'
+        ]);
     }
 
-    private function installLaravelClockwork()
+    private function configureLaravelElfinder()
     {
+        $this->line('Configure Laravel Elfinder');
+        $this->call('vendor:publish', [
+            '--provider' => 'Barryvdh\Elfinder\ElfinderServiceProvider',
+        ]);
 
+        /**
+         * Keep only tinymce5 bridge which is the only used by Vtec Admin
+         */
+        foreach($this->files->allFiles(resource_path('views\vendor\elfinder')) as $file) {
+            if ($file->getFilename() !== 'tinymce5.blade.php') {
+                unlink($file);
+            }
+        }
     }
 
-    private function installLaravelIdeHelper()
+    private function configureLaravelClockwork()
     {
-
+        $this->line('Configure Laravel Clockwork');
+        $this->call('vendor:publish', [
+            '--provider' => 'Clockwork\Support\Laravel\ClockworkServiceProvider',
+        ]);
     }
 
-    private function installPhpCsFixer()
+    private function configureLaravelIdeHelper()
     {
-
+        $this->line('Configure Laravel IDE Helper');
+        $this->call('vendor:publish', [
+            '--provider' => 'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+            '--tag' => 'config'
+        ]);
     }
 
-    private function removeLaravelMix()
+    private function configurePhpCsFixer()
     {
-
+        $this->line('Configure PHP CS Fixer');
+        $this->files->copy(__DIR__ . '/../../files/.php_cs.dist', base_path('.php_cs.dist'));
     }
 
-    private function installDocker()
+    private function removeAssets()
     {
+        $this->line('Remove assets');
+        $this->files->delete(base_path('package.json'), base_path('package-lock.json'), base_path('webpack.mix.js'));
+        $this->files->deleteDirectory(resource_path('js'));
+        $this->files->deleteDirectory(resource_path('sass'));
+    }
 
+    private function addDockerfiles()
+    {
+        $this->line('Add docker files');
+        $this->files->copyDirectory(__DIR__ . '/../../files/docker', base_path('docker'));
+        $this->files->copy(__DIR__ . '/../../files/docker-compose.yml', base_path('docker-compose.yml'));
+        $this->files->copy(__DIR__ . '/../../files/Dockerfile', base_path('Dockerfile'));
     }
 
     private function installDependencies(array $dependencies, bool $dev = false)
