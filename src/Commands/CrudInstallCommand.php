@@ -222,7 +222,7 @@ EOF
          * Do not include public packages
          */
         if (! Str::contains($this->files->get(base_path('.gitignore')), '/public/packages')) {
-            $this->files->append(base_path('.gitignore'), '/public/packages');
+            $this->files->append(base_path('.gitignore'), "/public/packages\n");
         }
 
         /**
@@ -256,6 +256,13 @@ EOF
             '--provider' => CrudServiceProvider::class,
             '--tag' => 'phpcs'
         ]);
+
+        /**
+         * Do not include phpcs cache
+         */
+        if (! Str::contains($this->files->get(base_path('.gitignore')), '.php_cs.cache')) {
+            $this->files->append(base_path('.gitignore'), ".php_cs.cache\n");
+        }
     }
 
     private function removeAssets()
