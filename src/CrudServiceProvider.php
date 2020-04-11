@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\QueryBuilder\QueryBuilder;
 use Vtec\Crud\Commands\CrudGeneratorCommand;
+use Vtec\Crud\Commands\CrudInstallCommand;
 use Vtec\Crud\Commands\CrudMakeCommand;
 
 class CrudServiceProvider extends ServiceProvider
@@ -26,6 +27,7 @@ class CrudServiceProvider extends ServiceProvider
             ]);
 
             $this->commands([
+                CrudInstallCommand::class,
                 CrudMakeCommand::class,
                 CrudGeneratorCommand::class,
             ]);

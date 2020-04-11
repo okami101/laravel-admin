@@ -20,18 +20,47 @@ You can install the package via composer:
 ```bash
 composer require vtec/crud
 
-php artisan crud:install ??
+php artisan crud:install
 
-php artisan vendor:publish --provider='Vtec\Crud\CrudServiceProvider' --tag=config
-php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag=migrations
-
+--default
 Change return route('login'); on Authenticate to return route('admin.url');
+AccountController
 
-Docker ??
-AccountController ??
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag=migrations
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag=config
 
+composer require laravel/ui
+php artisan ui:controllers
+
+composer require laracasts/generators --dev
+
+--choice
 laravel/sanctum ??
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" --tag=config
+> 'paths' => ['api/*', 'auth/*', 'sanctum/*'],
+> 'supports_credentials' => true,
+---
+add on api Kernel first line :
+\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+---
+
 barryvdh/laravel-elfinder ??
+add .gitignore /public/packages
+> php artisan elfinder:publish
+php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
+php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
+> Only TinyMCE5 required
+
+composer require itsgoingd/clockwork ??
+php artisan vendor:publish --provider="Clockwork\Support\Laravel\ClockworkServiceProvider" --tag=config
+
+composer require barryvdh/laravel-ide-helper --dev ??
+php artisan vendor:publish --provider="Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider" --tag=config
+
+composer require friendsofphp/php-cs-fixer --dev ??
+
+Remove webpack.mix.js package.json package-lock.json ??
+Docker ??
 ```
 
 > Env variables : ADMIN_URL
@@ -43,39 +72,9 @@ barryvdh/laravel-elfinder ??
 [spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable)
 [symfony/yaml](https://github.com/symfony/Yaml/)
 
-## Other recommended packages for admin
-
-```bash
-composer require laravel/ui itsgoingd/clockwork
-php artisan ui:auth
-php artisan elfinder:publish
-
-php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=config
-php artisan vendor:publish --provider='Barryvdh\Elfinder\ElfinderServiceProvider' --tag=views
-> Only TinyMCE5 required
-
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" --tag=config
-```
-
-```
-use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
-
-'api' => [
-    EnsureFrontendRequestsAreStateful::class,
-    'throttle:60,1',
-    \Illuminate\Routing\Middleware\SubstituteBindings::class,
-],
-
->> cors
-```
-
-## Recommended dev packages
-
-```bash
-composer require barryvdh/laravel-ide-helper friendsofphp/php-cs-fixer laracasts/generators --dev
-```
-
 ## Usage
+
+php artisan vendor:publish --provider='Vtec\Crud\CrudServiceProvider' --tag=config
 
 ``` php
 $crud = new Vtec\Crud();
@@ -103,7 +102,6 @@ If you discover any security related issues, please email freek@adr1enbe4udou1n.
 ## Credits
 
 - [Adrien Beaudouin](https://github.com/adr1enbe4udou1n)
-- [All Contributors](../../contributors)
 
 ## License
 
