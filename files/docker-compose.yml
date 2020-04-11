@@ -6,7 +6,7 @@ services:
     build:
       context: ./
     volumes:
-      - ./:/srv/api/laravel
+      - ./:/srv/api
     depends_on:
       - mysql
 
@@ -17,7 +17,7 @@ services:
       args:
         - APP_ENV=${APP_ENV}
     volumes:
-      - ./:/srv/api/laravel
+      - ./:/srv/api
       - ./docker/nginx/logs:/var/log/nginx
     ports:
       - "${NGINX_HTTP_PORT}:80"

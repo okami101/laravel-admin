@@ -27,7 +27,7 @@ COPY docker/laravel/php.ini /usr/local/etc/php/php.ini
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
-WORKDIR /srv/api/laravel
+WORKDIR /srv/api
 
 # copy init script
 COPY docker/laravel/init.sh /usr/local/bin/init

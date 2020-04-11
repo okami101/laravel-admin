@@ -34,11 +34,11 @@ php artisan crud:install
 
 ## Usage
 
-php artisan vendor:publish --provider='Vtec\Crud\CrudServiceProvider' --tag=config
+Use `docker-compose exec laravel` before each command if using docker.
 
-``` php
-$crud = new Vtec\Crud();
-echo $crud->echoPhrase('Hello, Vtec!');
+```bash
+php artisan storage:link
+php artisan migrate:fresh --seed
 ```
 
 ## Testing

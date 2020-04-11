@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /srv/api/laravel || exit
+cd /srv/api || exit
 
 composer install --no-dev
 php artisan key:generate
