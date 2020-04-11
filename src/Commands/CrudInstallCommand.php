@@ -221,9 +221,7 @@ EOF
         /**
          * Do not include public packages
          */
-        if (! Str::contains($this->files->get(base_path('.gitignore')), '/public/packages')) {
-            $this->files->append(base_path('.gitignore'), "/public/packages\n");
-        }
+        $this->addToGitIgnore('/public/packages');
 
         /**
          * Publish Elfinder assets
@@ -246,6 +244,26 @@ EOF
             '--provider' => 'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
             '--tag' => 'config'
         ]);
+
+        $this->call('ide-helper:generate');
+        $this->call('ide-helper:meta');
+
+        $this->warn('Add this code inside composer.json for automatic generation :' . <<<EOF
+"scripts":{
+    "post-update-cmd": [
+        "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+        "@php artisan ide-helper:generate",
+        "@php artisan ide-helper:meta"
+    ]
+},
+EOF
+        );
+
+        /**
+         * Do not include generated code
+         */
+        $this->addToGitIgnore('.phpstorm.meta.php');
+        $this->addToGitIgnore('_ide_helper.php');
     }
 
     private function configurePhpCsFixer()
@@ -260,9 +278,7 @@ EOF
         /**
          * Do not include phpcs cache
          */
-        if (! Str::contains($this->files->get(base_path('.gitignore')), '.php_cs.cache')) {
-            $this->files->append(base_path('.gitignore'), ".php_cs.cache\n");
-        }
+        $this->addToGitIgnore('.php_cs.cache');
     }
 
     private function removeAssets()
@@ -335,5 +351,12 @@ EOF
                 $this->line($buffer);
             }
         });
+    }
+
+    private function addToGitIgnore($line)
+    {
+        if (! Str::contains($this->files->get(base_path('.gitignore')), $line)) {
+            $this->files->append(base_path('.gitignore'), "$line\n");
+        }
     }
 }

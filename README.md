@@ -1,9 +1,7 @@
-# Very short description of the package
+# Vtec Crud
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/adr1enbe4udou1n/vtec-crud.svg?style=flat-square)](https://packagist.org/packages/adr1enbe4udou1n/:package_name)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/adr1enbe4udou1n/vtec-crud/run-tests?label=tests)](https://github.com/adr1enbe4udou1n/:package_name/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/adr1enbe4udou1n/vtec-crud.svg?style=flat-square)](https://packagist.org/packages/adr1enbe4udou1n/:package_name)
-
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/adr1enbe4udou1n/vtec-crud.svg?style=flat-square)](https://packagist.org/packages/adr1enbe4udou1n/vtec-crud)
+[![Total Downloads](https://img.shields.io/packagist/dt/adr1enbe4udou1n/vtec-crud.svg?style=flat-square)](https://packagist.org/packages/adr1enbe4udou1n/vtec-crud)
 
 This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
 

@@ -23,7 +23,7 @@ class Impersonate
         }
 
         return (new Pipeline(app()))->send($request)->through([
-            \App\Http\Middleware\Authenticate::class . ':sanctum',
+            '\App\Http\Middleware\Authenticate:sanctum',
         ])->then(function ($request) use ($next) {
             return $next($request);
         });

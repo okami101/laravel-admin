@@ -1,9 +1,11 @@
 {
     "name": "vtec/crud",
-    "description": "",
+    "description": "Api based crud generator for Laravel.",
     "keywords": [
         "vtec",
-        "vtec-crud"
+        "vtec-crud",
+        "admin",
+        "laravel"
     ],
     "homepage": "https://github.com/adr1enbe4udou1n/vtec-crud",
     "license": "MIT",
@@ -11,7 +13,7 @@
         {
             "name": "Adrien Beaudouin",
             "email": "adrien.beaudouin@outlook.com",
-            "homepage": "https://okami101.io",
+            "homepage": "https://docs.okami101.io",
             "role": "Developer"
         }
     ],
