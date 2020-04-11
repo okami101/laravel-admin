@@ -20,6 +20,7 @@ class CrudServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/admin.php' => config_path('admin.php'),
+                __DIR__.'/../config/cors.php' => config_path('cors.php'),
             ], 'config');
 
             $this->publishes([

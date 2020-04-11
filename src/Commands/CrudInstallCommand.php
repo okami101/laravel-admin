@@ -7,6 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
+use Vtec\Crud\CrudServiceProvider;
 
 class CrudInstallCommand extends Command
 {
@@ -68,6 +69,12 @@ class CrudInstallCommand extends Command
         $this->installDependencies($dependencies);
         $this->installDependencies($devDependencies, true);
         $this->updateDependencies();*/
+
+        $this->call('vendor:publish', [
+            '--provider' => CrudServiceProvider::class,
+            '--tag' => 'config',
+            '--force' => true,
+        ]);
 
         $installLaravelSanctum = true;
         $installLaravelElfinder = true;
@@ -133,8 +140,13 @@ class CrudInstallCommand extends Command
     private function addAccountController()
     {
         $this->line('Add account controller');
-        $this->files->copy(__DIR__ . '/../../files/.php_cs.dist', app_path('Http/Controllers'));
-        $this->files->copy(__DIR__ . '/../../files/.php_cs.dist', app_path('.php_cs.dist'));
+
+        if (! $this->files->isDirectory(app_path('Http/Resources'))) {
+            $this->files->makeDirectory(app_path('Http/Resources'));
+        }
+        $this->files->copy(__DIR__ . '/../../files/stubs/user.stub', app_path('User.php'));
+        $this->files->copy(__DIR__ . '/../../files/stubs/user.resource.stub', app_path('Http/Resources/User.php'));
+        $this->files->copy(__DIR__ . '/../../files/stubs/account.controller.stub', app_path('Http/Controllers/AccountController.php'));
     }
 
     private function configureLaravelMediaLibrary()
@@ -153,6 +165,23 @@ class CrudInstallCommand extends Command
             '--provider' => 'Laravel\Sanctum\SanctumServiceProvider',
             '--tag' => 'sanctum-config'
         ]);
+
+        $kernel = app_path('Http/Kernel.php');
+
+        if (! Str::contains($this->files->get($kernel), 'EnsureFrontendRequestsAreStateful')) {
+            $lines = file($kernel);
+            foreach ($lines as $lineNumber => $line) {
+                if (strpos($line, 'api') !== false) {
+                    array_splice($lines, $lineNumber + 1, 0, <<<EOF
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+
+EOF
+                    );
+                    break;
+                }
+            }
+            $this->files->replace($kernel, $lines);
+        }
     }
 
     private function configureLaravelElfinder()
@@ -170,6 +199,18 @@ class CrudInstallCommand extends Command
                 unlink($file);
             }
         }
+
+        /**
+         * Do not include public packages
+         */
+        if (! Str::contains($this->files->get(base_path('.gitignore')), '/public/packages')) {
+            $this->files->append(base_path('.gitignore'), '/public/packages');
+        }
+
+        /**
+         * Publish Elfinder assets
+         */
+        $this->call('elfinder:publish');
     }
 
     private function configureLaravelClockwork()
@@ -209,6 +250,18 @@ class CrudInstallCommand extends Command
         $this->files->copyDirectory(__DIR__ . '/../../files/docker', base_path('docker'));
         $this->files->copy(__DIR__ . '/../../files/docker-compose.yml', base_path('docker-compose.yml'));
         $this->files->copy(__DIR__ . '/../../files/Dockerfile', base_path('Dockerfile'));
+
+        $this->line("\nUse this docker variables into you .env :");
+
+        $this->warn(<<<EOF
+#Laravel host port
+NGINX_HTTP_PORT=8000
+#phpMyAdmin host port
+PMA_PORT=9000
+#MySQL root
+MYSQL_ROOT_PASSWORD=root
+EOF
+);
     }
 
     private function installDependencies(array $dependencies, bool $dev = false)
