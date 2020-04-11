@@ -277,12 +277,14 @@ EOF
         $this->line("\nUse this docker variables into you .env :");
 
         $this->warn(<<<EOF
-#Laravel host port
+# Laravel host port
 NGINX_HTTP_PORT=8000
-#phpMyAdmin host port
+# phpMyAdmin host port
 PMA_PORT=9000
-#MySQL root
+# MySQL root
 MYSQL_ROOT_PASSWORD=root
+# Timezone
+APP_TIMEZONE=Europe/Paris
 EOF
 );
     }
