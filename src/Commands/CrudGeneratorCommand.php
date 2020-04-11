@@ -62,6 +62,7 @@ class CrudGeneratorCommand extends Command
 
         if ($this->files->isFile($input)) {
             $this->loadFileDescriptor($input);
+
             return;
         }
 
@@ -72,6 +73,7 @@ class CrudGeneratorCommand extends Command
             foreach ($this->files->files($input) as $file) {
                 $this->loadFileDescriptor($file);
             }
+
             return;
         }
 
@@ -130,8 +132,8 @@ class CrudGeneratorCommand extends Command
             /**
              * Specific database attribute
              */
-            if (!empty($field['db'])) {
-                foreach($field['db'] as $attribute) {
+            if (! empty($field['db'])) {
+                foreach ($field['db'] as $attribute) {
                     $schema .= ":$attribute";
                 }
             }

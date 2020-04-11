@@ -5,8 +5,8 @@ namespace Vtec\Crud\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Symfony\Component\Process\Process;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
+use Symfony\Component\Process\Process;
 use Vtec\Crud\CrudServiceProvider;
 
 class CrudInstallCommand extends Command
@@ -52,7 +52,7 @@ class CrudInstallCommand extends Command
          */
         $this->call('vendor:publish', [
             '--provider' => MediaLibraryServiceProvider::class,
-            '--tag' => ['config', 'migrations']
+            '--tag' => ['config', 'migrations'],
         ]);
 
         $this->call('vendor:publish', [
@@ -181,7 +181,7 @@ class CrudInstallCommand extends Command
         $this->line('Configure Laravel Sanctum');
         $this->call('vendor:publish', [
             '--provider' => 'Laravel\Sanctum\SanctumServiceProvider',
-            '--tag' => 'sanctum-config'
+            '--tag' => 'sanctum-config',
         ]);
 
         $kernel = app_path('Http/Kernel.php');
@@ -190,11 +190,16 @@ class CrudInstallCommand extends Command
             $lines = file($kernel);
             foreach ($lines as $lineNumber => $line) {
                 if (strpos($line, 'api') !== false) {
-                    array_splice($lines, $lineNumber + 1, 0, <<<EOF
+                    array_splice(
+                        $lines,
+                        $lineNumber + 1,
+                        0,
+                        <<<EOF
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
 
 EOF
                     );
+
                     break;
                 }
             }
@@ -212,7 +217,7 @@ EOF
         /**
          * Keep only tinymce5 bridge which is the only used by Vtec Admin
          */
-        foreach($this->files->allFiles(resource_path('views\vendor\elfinder')) as $file) {
+        foreach ($this->files->allFiles(resource_path('views\vendor\elfinder')) as $file) {
             if ($file->getFilename() !== 'tinymce5.blade.php') {
                 unlink($file);
             }
@@ -242,13 +247,14 @@ EOF
         $this->line('Configure Laravel IDE Helper');
         $this->call('vendor:publish', [
             '--provider' => 'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-            '--tag' => 'config'
+            '--tag' => 'config',
         ]);
 
         $this->call('ide-helper:generate');
         $this->call('ide-helper:meta');
 
-        $this->warn('Add this code inside composer.json for automatic generation :' . <<<EOF
+        $this->warn(
+            'Add this code inside composer.json for automatic generation :' . <<<EOF
 "scripts":{
     "post-update-cmd": [
         "Illuminate\\Foundation\\ComposerScripts::postUpdate",
@@ -272,7 +278,7 @@ EOF
 
         $this->call('vendor:publish', [
             '--provider' => CrudServiceProvider::class,
-            '--tag' => 'phpcs'
+            '--tag' => 'phpcs',
         ]);
 
         /**
@@ -294,12 +300,13 @@ EOF
         $this->line('Add docker files');
         $this->call('vendor:publish', [
             '--provider' => CrudServiceProvider::class,
-            '--tag' => 'docker'
+            '--tag' => 'docker',
         ]);
 
         $this->line("\nUse this docker variables into you .env :");
 
-        $this->warn(<<<EOF
+        $this->warn(
+            <<<EOF
 # Specific docker environment variables
 # Laravel host port
 NGINX_HTTP_PORT=8000
@@ -320,7 +327,7 @@ SESSION_DRIVER=redis
 # Use redis queue on prod
 # QUEUE_CONNECTION=redis
 EOF
-);
+        );
     }
 
     private function installDependencies(array $dependencies, bool $dev = false)
