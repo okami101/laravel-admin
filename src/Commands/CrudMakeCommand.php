@@ -81,7 +81,7 @@ class CrudMakeCommand extends GeneratorCommand
             $this->createFactory();
         }
 
-        if ($this->option('migration')) {
+        if ($this->option('schema')) {
             $this->createMigration();
         }
 
@@ -297,7 +297,7 @@ class CrudMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Create a migration file for the model.
+     * Create a migration file for the model with schema support.
      *
      * @return void
      */
@@ -305,9 +305,10 @@ class CrudMakeCommand extends GeneratorCommand
     {
         $table = Str::snake(Str::pluralStudly(class_basename($this->argument('name'))));
 
-        $this->call('make:migration', [
+        $this->call('make:migration:schema', [
             'name' => "create_{$table}_table",
-            '--create' => $table,
+            '--model' => false,
+            '--schema' => collect($this->option('schema'))->implode(', '),
         ]);
     }
 
@@ -345,14 +346,14 @@ class CrudMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'],
-            ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
-            ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
+            ['schema', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of database fields for migration'],
             ['fields', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of fields (field:type)'],
             ['mediable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of mediable fields (field:multiple)'],
             ['translatable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of translatable fields'],
             ['searchable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of searchable fields'],
             ['sortable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of sortable fields'],
+            ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
+            ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
         ];
     }

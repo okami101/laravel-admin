@@ -74,7 +74,7 @@ class CrudInstallCommand extends Command
         $dependencies = ['laravel/ui'];
         $devDependencies = ['laracasts/generators'];
 
-        if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (mandatory for sanctum provider) ?', true)) {
+        if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (required if you choose sanctum provider) ?', true)) {
             $dependencies[] = 'laravel/sanctum';
         }
         if ($installLaravelElfinder = $this->confirm('Install barryvdh/laravel-elfinder to provide an admin interface for File Management ?', true)) {

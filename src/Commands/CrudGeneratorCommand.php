@@ -78,18 +78,6 @@ class CrudGeneratorCommand extends Command
         $this->error('Invalid input !');
     }
 
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            ['file', InputArgument::REQUIRED, 'The YAML file descriptor or the directory which contains YAML descriptors'],
-        ];
-    }
-
     private function loadFileDescriptor($file)
     {
         $descriptor = Yaml::parseFile($file);
@@ -102,18 +90,11 @@ class CrudGeneratorCommand extends Command
                 '--searchable' => $this->getFieldNames($resource, 'searchable'),
                 '--sortable' => $this->getFieldNames($resource, 'sortable'),
                 '--mediable' => $this->getMediableFields($resource),
-                '--force' => $this->option('force'),
+                '--schema' => $this->getFieldSchemas($resource)->implode(', '),
                 '--factory' => $this->option('factory'),
                 '--seed' => $this->option('seed'),
+                '--force' => $this->option('force'),
             ]);
-
-            if ($this->option('migration')) {
-                $this->call('make:migration:schema', [
-                    'name' => "create_{$name}_table",
-                    '--model' => false,
-                    '--schema' => $this->getFieldSchemas($resource)->implode(', '),
-                ]);
-            }
         }
     }
 
@@ -184,6 +165,18 @@ class CrudGeneratorCommand extends Command
     }
 
     /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['file', InputArgument::REQUIRED, 'The YAML file descriptor or the directory which contains YAML descriptors'],
+        ];
+    }
+
+    /**
      * Get the console command options.
      *
      * @return array
@@ -191,7 +184,6 @@ class CrudGeneratorCommand extends Command
     protected function getOptions()
     {
         return [
-            ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
