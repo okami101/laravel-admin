@@ -25,7 +25,17 @@ class CrudServiceProvider extends ServiceProvider
 
             $this->publishes([
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/crud'),
-            ]);
+            ], 'lang');
+
+            $this->publishes([
+                __DIR__.'/../files/docker' => base_path('docker'),
+                __DIR__.'/../files/docker-compose.yml' => base_path('docker-compose.yml'),
+                __DIR__.'/../files/Dockerfile' => base_path('Dockerfile'),
+            ], 'docker');
+
+            $this->publishes([
+                __DIR__.'/../files/.php_cs.dist' => base_path('.php_cs.dist'),
+            ], 'phpcs');
 
             $this->commands([
                 CrudInstallCommand::class,

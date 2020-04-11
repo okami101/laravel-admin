@@ -21,8 +21,6 @@ You can install the package via composer:
 composer require vtec/crud
 
 php artisan crud:install
-
-> routes
 ```
 
 > Env variables : ADMIN_URL

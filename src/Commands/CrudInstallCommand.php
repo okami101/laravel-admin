@@ -47,13 +47,37 @@ class CrudInstallCommand extends Command
      */
     public function handle()
     {
-        /*$dependencies = ['laravel/ui'];
+        /**
+         * Auto included package publish
+         */
+        $this->call('vendor:publish', [
+            '--provider' => MediaLibraryServiceProvider::class,
+            '--tag' => ['config', 'migrations']
+        ]);
+
+        $this->call('vendor:publish', [
+            '--provider' => CrudServiceProvider::class,
+            '--tag' => 'config',
+            '--force' => true,
+        ]);
+
+        /**
+         * Default Laravel configuration with auth and user routes and api controllers
+         */
+        $this->changeAuthenticationRedirect();
+        $this->addUserController();
+        $this->configureRoutes();
+
+        /**
+         * Composer dependencies
+         */
+        $dependencies = ['laravel/ui'];
         $devDependencies = ['laracasts/generators'];
 
         if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (mandatory for sanctum provider) ?', true)) {
             $dependencies[] = 'laravel/sanctum';
         }
-        if ($installLaravelElfinder = $this->confirm('Install barryvdh/laravel-elfinder to provide an admin interface for File Management ?')) {
+        if ($installLaravelElfinder = $this->confirm('Install barryvdh/laravel-elfinder to provide an admin interface for File Management ?', true)) {
             $dependencies[] = 'barryvdh/laravel-elfinder';
         }
         if ($installLaravelClockwork = $this->confirm('Install itsgoingd/clockwork to provide debugging and profiling ?', true)) {
@@ -68,25 +92,16 @@ class CrudInstallCommand extends Command
 
         $this->installDependencies($dependencies);
         $this->installDependencies($devDependencies, true);
-        $this->updateDependencies();*/
+        $this->updateDependencies();
 
-        $this->call('vendor:publish', [
-            '--provider' => CrudServiceProvider::class,
-            '--tag' => 'config',
-            '--force' => true,
-        ]);
+        /**
+         * Laravel UI auth controllers
+         */
+        $this->call('ui:controllers');
 
-        $installLaravelSanctum = true;
-        $installLaravelElfinder = true;
-        $installLaravelClockwork = true;
-        $installLaravelIdeHelper = true;
-        $installPhpCsFixer = true;
-
-        $this->configureLaravelMediaLibrary();
-        $this->changeAuthenticationRedirect();
-        $this->addAuthentificationControllers();
-        $this->addAccountController();
-
+        /**
+         * Specific per-package preconfiguration
+         */
         if ($installLaravelSanctum) {
             $this->configureLaravelSanctum();
         }
@@ -107,13 +122,13 @@ class CrudInstallCommand extends Command
             $this->configurePhpCsFixer();
         }
 
-        //if ($this->confirm('Remove all assets files (no need if you use frontend framework as Nuxt.js) ?')) {
+        if ($this->confirm('Remove all assets files (no need if you use frontend framework as Nuxt.js) ?', true)) {
             $this->removeAssets();
-        //}
+        }
 
-        //if ($this->confirm('Install Docker files ?', true)) {
+        if ($this->confirm('Install Docker files ?', true)) {
             $this->addDockerfiles();
-        //}
+        }
     }
 
     /**
@@ -131,31 +146,34 @@ class CrudInstallCommand extends Command
         $this->files->replace($file, Str::replaceArray("route('login')", ["config('admin.url')"], $content));
     }
 
-    private function addAuthentificationControllers()
+    private function addUserController()
     {
-        $this->line('Add authentification controllers');
-        $this->call('ui:controllers');
-    }
+        $this->line('Add user and account controller');
 
-    private function addAccountController()
-    {
-        $this->line('Add account controller');
-
+        /**
+         * Add user controller
+         */
+        if (! $this->files->isDirectory(app_path('Http/Requests'))) {
+            $this->files->makeDirectory(app_path('Http/Requests'));
+        }
         if (! $this->files->isDirectory(app_path('Http/Resources'))) {
             $this->files->makeDirectory(app_path('Http/Resources'));
         }
-        $this->files->copy(__DIR__ . '/../../files/stubs/user.stub', app_path('User.php'));
-        $this->files->copy(__DIR__ . '/../../files/stubs/user.resource.stub', app_path('Http/Resources/User.php'));
-        $this->files->copy(__DIR__ . '/../../files/stubs/account.controller.stub', app_path('Http/Controllers/AccountController.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/user/model.stub', app_path('User.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/user/resource.stub', app_path('Http/Resources/User.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/user/request.store.stub', app_path('Http/Requests/StoreUser.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/user/request.update.stub', app_path('Http/Requests/UpdateUser.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/user/controller.stub', app_path('Http/Controllers/UserController.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/user/account.controller.stub', app_path('Http/Controllers/AccountController.php'));
     }
 
-    private function configureLaravelMediaLibrary()
+    private function configureRoutes()
     {
-        $this->line('Configure Laravel Media Library');
-        $this->call('vendor:publish', [
-            '--provider' => MediaLibraryServiceProvider::class,
-            '--tag' => ['config', 'migrations']
-        ]);
+        /**
+         * Add web and api routes
+         */
+        $this->files->copy(__DIR__ . '/../../stubs/routes/api.stub', base_path('routes/api.php'));
+        $this->files->copy(__DIR__ . '/../../stubs/routes/web.stub', base_path('routes/web.php'));
     }
 
     private function configureLaravelSanctum()
@@ -233,7 +251,11 @@ EOF
     private function configurePhpCsFixer()
     {
         $this->line('Configure PHP CS Fixer');
-        $this->files->copy(__DIR__ . '/../../files/.php_cs.dist', base_path('.php_cs.dist'));
+
+        $this->call('vendor:publish', [
+            '--provider' => CrudServiceProvider::class,
+            '--tag' => 'phpcs'
+        ]);
     }
 
     private function removeAssets()
@@ -247,9 +269,10 @@ EOF
     private function addDockerfiles()
     {
         $this->line('Add docker files');
-        $this->files->copyDirectory(__DIR__ . '/../../files/docker', base_path('docker'));
-        $this->files->copy(__DIR__ . '/../../files/docker-compose.yml', base_path('docker-compose.yml'));
-        $this->files->copy(__DIR__ . '/../../files/Dockerfile', base_path('Dockerfile'));
+        $this->call('vendor:publish', [
+            '--provider' => CrudServiceProvider::class,
+            '--tag' => 'docker'
+        ]);
 
         $this->line("\nUse this docker variables into you .env :");
 

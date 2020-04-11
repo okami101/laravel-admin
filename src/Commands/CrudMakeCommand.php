@@ -112,7 +112,7 @@ class CrudMakeCommand extends GeneratorCommand
             }
         }
 
-        return __DIR__."/stubs/{$stub}.stub";
+        return __DIR__."/../../stubs/{$stub}.stub";
     }
 
     /**
