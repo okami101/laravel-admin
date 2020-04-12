@@ -1,8 +1,8 @@
-# Vtec Crud
+# Vtec Laravel Crud
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vtec/crud.svg?style=flat-square)](https://packagist.org/packages/vtec/crud)
-[![Total Downloads](https://img.shields.io/packagist/dt/vtec/crud.svg?style=flat-square)](https://packagist.org/packages/vtec/crud)
-[![License](https://img.shields.io/packagist/l/vtec/crud.svg?style=flat-square)](https://packagist.org/packages/vtec/crud)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
+[![Total Downloads](https://img.shields.io/packagist/dt/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
+[![License](https://img.shields.io/packagist/l/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 
 Quick crud api resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/adr1enbe4udou1n/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
 
@@ -29,7 +29,7 @@ Quick crud api resource builder for Laravel 7. Fully compatible with [Vtec Admin
 Simply quick init your project by this simple 2 steps :
 
 ```bash
-composer require vtec/crud
+composer require vtec/laravel-crud
 php artisan crud:install
 ```
 

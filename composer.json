@@ -1,5 +1,5 @@
 {
-    "name": "vtec/crud",
+    "name": "vtec/laravel-crud",
     "description": "Api based crud generator for Laravel.",
     "keywords": [
         "vtec",
@@ -7,7 +7,7 @@
         "admin",
         "laravel"
     ],
-    "homepage": "https://github.com/adr1enbe4udou1n/vtec-crud",
+    "homepage": "https://github.com/adr1enbe4udou1n/vtec-laravel-crud",
     "license": "MIT",
     "authors": [
         {
