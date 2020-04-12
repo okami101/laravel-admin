@@ -15,10 +15,9 @@ services:
   nginx:
     build:
       context: ./docker/nginx
-      args:
-        - APP_ENV=${APP_ENV}
     volumes:
       - ./:/srv/api
+      - ./admin/dist:/srv/api/admin
     ports:
       - "${NGINX_HTTP_PORT}:80"
     depends_on:
