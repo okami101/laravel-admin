@@ -5,6 +5,7 @@ services:
   laravel:
     build:
       context: ./
+    restart: always
     volumes:
       - ./:/srv/api
     depends_on:
@@ -27,6 +28,7 @@ services:
   mysql:
     build:
       context: ./docker/mysql
+    restart: always
     environment:
       - MYSQL_DATABASE=${DB_DATABASE}
       - MYSQL_USER=${DB_USERNAME}
@@ -38,6 +40,7 @@ services:
   phpmyadmin:
     build:
       context: ./docker/phpmyadmin
+    restart: always
     environment:
       - PMA_ARBITRARY=1
       - MYSQL_USER=pma
@@ -52,3 +55,4 @@ services:
   redis:
     build:
       context: ./docker/redis
+    restart: always
