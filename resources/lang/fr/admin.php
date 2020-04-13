@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'read_only' => 'Application en lecture seule.',
+    'read_only' => 'Application en mode lecture seule.',
 ];
