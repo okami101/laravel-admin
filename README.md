@@ -8,21 +8,21 @@ Quick crud api resource builder for Laravel 7. Fully compatible with [Vtec Admin
 
 ## Features
 
-- On-asking installer for quick start by optional packages selection
-- Many optional dev packages proposed by the installer as IDE Helper, PHP CS Fixer with Laravel preset, Clockwork, Laracasts Generators
-- [Laravel Sanctum](https://github.com/laravel/sanctum) for admin SPA auth
-- [Laravel elFinder](https://github.com/barryvdh/laravel-elfinder) for direct disk file management with Wysiwyg bridges
-- Media support thanks to [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary)
-- Translatable model support thanks to [spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable)
-- Simple account controller for profile editing and password change
-- User impersonation with dedicated middleware
-- Quick resource api generator commands with direct YAML descriptor support !
-- Preconfigured docker files included with ready to use MySQL, phpMyadmin, Nginx and Redis !
+* On-asking installer for quick start by optional packages selection
+* Many optional dev packages proposed by the installer as IDE Helper, PHP CS Fixer with Laravel preset, Clockwork, Laracasts Generators
+* [Laravel Sanctum](https://github.com/laravel/sanctum) for admin SPA auth
+* [Laravel elFinder](https://github.com/barryvdh/laravel-elfinder) for direct disk file management with Wysiwyg bridges
+* Media support thanks to [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary)
+* Translatable model support thanks to [spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable)
+* Simple account controller for profile editing and password change
+* User impersonation with dedicated middleware
+* Quick resource api generator commands with direct YAML descriptor support !
+* Preconfigured docker files included with ready to use MySQL, phpMyadmin, Nginx and Redis !
 
 ## Requirements
 
-- You must have PHP 7.4 (required by spatie media library package)  
-- Should be installed on totally fresh laravel 7 installation
+* You must have PHP 7.4 (required by spatie media library package)  
+* Should be installed on totally fresh laravel 7 installation
 
 ## Installation
 
@@ -67,10 +67,10 @@ Full documentation can be found on the [Vtec docs website](https://vtec.okami101
 
 ## Used dependencies
 
-- [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) for quick api list builder with pagination, filtering and sorting support
-- [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary) for easy database file management support
-- [spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable) for json based translatable fields database support
-- [symfony/yaml](https://github.com/symfony/Yaml/) for generator based on YAML file descriptor
+* [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) for quick api list builder with pagination, filtering and sorting support
+* [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary) for easy database file management support
+* [spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable) for json based translatable fields database support
+* [symfony/yaml](https://github.com/symfony/Yaml/) for generator based on YAML file descriptor
 
 ## License
 
