@@ -56,6 +56,14 @@ Simply use `php artisan crud:make MyNewResource` with many as option as possible
 Use `php artisan crud:make --help` for all many options detail.  
 Don't hesitate to use `php artisan ide-helper:models` after in order to have all field Model autocompletion enabled !
 
+Finally register resource routes into routes/api.php as next :
+```php
+Route::apiResources([
+    /** previous entities */
+    'monsters' => 'MonsterController',
+]);
+```
+
 For even more auto generation power, and because `crud:make` can be exhausting to write with all options, a direct resource yaml file descriptor can be used via `php artisan crud:generate my-new-resource.yml`.  
 You can also directly provide a directory which contains all necessary YAML resource descriptor files as needed.
 
