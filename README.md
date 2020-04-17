@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 [![License](https://img.shields.io/packagist/l/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 
-Quick crud api resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/adr1enbe4udou1n/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
+Quick crud api resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
 
 ## Features
 
@@ -34,7 +34,7 @@ php artisan crud:install
 ```
 
 Simply follow wizard. The installer will preconfigure all of asked package for you and generate all minimal boilerplate code for quick start.  
-Laravel Sanctum is ready to use for [Vtec Admin](https://github.com/adr1enbe4udou1n/vtec-admin).
+Laravel Sanctum is ready to use for [Vtec Admin](https://github.com/okami101/vtec-admin).
 
 > By default admin URL will be http://localhost:8080 which is default Vue CLI dev serve URL.  
 > Dont forget to edit it on production. Just use ADMIN_URL environment variable for that.
