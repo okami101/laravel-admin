@@ -36,7 +36,7 @@ php artisan crud:install
 Simply follow wizard. The installer will preconfigure all of asked package for you and generate all minimal boilerplate code for quick start.  
 Laravel Sanctum is ready to use for [Vtec Admin](https://github.com/okami101/vtec-admin).
 
-> By default admin URL will be http://localhost:8080 which is default Vue CLI dev serve URL.  
+> By default admin URL will run at [http://localhost:8080](http://localhost:8080) which is default Vue CLI dev serve URL.  
 > Dont forget to edit it on production. Just use ADMIN_URL environment variable for that.
 
 After the installation, if you selected docker, simply launch `docker-compose up`. Don't forget to adapt your environments variables with those outputted by installer when finished.
