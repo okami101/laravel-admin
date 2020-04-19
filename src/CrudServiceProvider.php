@@ -3,6 +3,7 @@
 namespace Vtec\Crud;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -47,6 +48,7 @@ class CrudServiceProvider extends ServiceProvider
         }
 
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
+        Route::mixin(new AdminRouteMethods);
 
         Validator::extend('current_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, auth()->user()->password);
