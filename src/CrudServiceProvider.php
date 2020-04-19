@@ -9,6 +9,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use Vtec\Crud\Commands\CrudGeneratorCommand;
 use Vtec\Crud\Commands\CrudInstallCommand;
 use Vtec\Crud\Commands\CrudMakeCommand;
+use Vtec\Crud\Commands\UserCreateCommand;
 
 class CrudServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,7 @@ class CrudServiceProvider extends ServiceProvider
                 CrudInstallCommand::class,
                 CrudMakeCommand::class,
                 CrudGeneratorCommand::class,
+                UserCreateCommand::class,
             ]);
         }
 

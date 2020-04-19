@@ -41,12 +41,14 @@ Laravel Sanctum is ready to use for [Vtec Admin](https://github.com/okami101/vte
 
 After the installation, if you selected docker, simply launch `docker-compose up`. Don't forget to adapt your environments variables with those outputted by installer when finished.
 
-Then you juste have to setup laravel installation as normal (after env setup) :
+Then you just have to setup laravel installation as normal (after env setup) :
 
 ```bash
 php artisan storage:link
 php artisan migrate:fresh --seed
 ```
+
+Finally create your first user by `php artisan user:create admin@example.com`. You will be prompted for the user name and password.
 
 > If you use docker, use `docker-compose exec laravel` before each command.
 
