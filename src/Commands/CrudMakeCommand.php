@@ -77,12 +77,12 @@ class CrudMakeCommand extends GeneratorCommand
         /**
          * Generate resource data (migration, factory and seeder)
          */
-        if ($this->option('factory')) {
-            $this->createFactory();
-        }
-
         if ($this->option('schema')) {
             $this->createMigration();
+        }
+
+        if ($this->option('factory')) {
+            $this->createFactory();
         }
 
         if ($this->option('seed')) {
@@ -292,7 +292,7 @@ class CrudMakeCommand extends GeneratorCommand
 
         $this->call('make:factory', [
             'name' => "{$factory}Factory",
-            '--model' => $this->qualifyClass($this->getNameInput()),
+            '--model' => $this->argument('name'),
         ]);
     }
 

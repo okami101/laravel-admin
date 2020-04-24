@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Yaml\Yaml;
 
-class CrudGeneratorCommand extends Command
+class CrudGenerateCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -122,6 +122,13 @@ class CrudGeneratorCommand extends Command
     {
         return $this->getDatabaseFields($resource)->map(function ($field, $name) {
             $type = $field['type'] ?? 'string';
+
+            /**
+             * JSON required if translatable
+             */
+            if ($field['translatable'] ?? false) {
+                $type = 'json';
+            }
 
             $schema = "$name:$type";
 
