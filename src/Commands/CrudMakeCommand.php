@@ -88,6 +88,8 @@ class CrudMakeCommand extends GeneratorCommand
         if ($this->option('seed')) {
             $this->createSeeder();
         }
+
+        $this->createRoutes();
     }
 
     /**
@@ -327,6 +329,39 @@ class CrudMakeCommand extends GeneratorCommand
         $this->call('make:seeder', [
             'name' => "{$seeder}Seeder",
         ]);
+    }
+
+    /**
+     * Add routes to api
+     */
+    protected function createRoutes()
+    {
+        $model = $this->argument('name');
+        $slug = Str::slug(Str::plural($model));
+
+        $routeFile = base_path('routes/api.php');
+        $content = file($routeFile, FILE_IGNORE_NEW_LINES);
+
+        $lines = count($content);
+        $startLine = array_search('Route::apiResources', $content, true);
+
+        for ($i = $startLine + 1; $i < $lines; $i++) {
+            if (Str::contains($content[$i], ']);')) {
+                $endLine = $i;
+
+                break;
+            }
+        }
+
+        array_splice(
+            $content,
+            $endLine,
+            0,
+            <<<EOF
+        '$slug' => '{$model}Controller',
+EOF
+        );
+        $this->files->put($routeFile, implode(PHP_EOL, $content) . PHP_EOL);
     }
 
     /**

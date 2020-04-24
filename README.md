@@ -54,11 +54,11 @@ Finally create your first user by `php artisan user:create admin@example.com`. Y
 
 ## Generate api based crud resources
 
-Simply use `php artisan crud:make MyNewResource` with many as option as possible in order to generate your model.  
+Simply use `php artisan crud:make Monsters` with many as option as possible in order to generate your model.  
 Use `php artisan crud:make --help` for all many options detail.  
 Don't hesitate to use `php artisan ide-helper:models` after in order to have all field Model autocompletion enabled !
 
-Finally register resource routes into routes/api.php as next :
+In addition, api routes should be registered automatically at `routes/api.php` file in that place :
 ```php
 Route::apiResources([
     /** previous entities */
