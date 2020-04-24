@@ -171,7 +171,8 @@ class CrudMakeCommand extends GeneratorCommand
      */
     protected function replaceClass($stub, $name)
     {
-        $modelClass = $this->rootNamespace().$this->argument('name');
+        $namespacedModel = $this->rootNamespace().$this->argument('name');
+        $model = class_basename($namespacedModel);
         $class = parent::replaceClass($stub, $name);
 
         return str_replace([
@@ -184,6 +185,7 @@ class CrudMakeCommand extends GeneratorCommand
             '{{ namespacedModel }}',
             '{{ model }}',
             '{{ modelVariable }}',
+            '{{ user }}',
         ], [
             $this->getArrayString($this->getFields()->keys()),
             $this->getArrayWithKeysString($this->getCasts()),
@@ -191,9 +193,10 @@ class CrudMakeCommand extends GeneratorCommand
             $this->getArrayString($this->getSearchableFields()),
             $this->getArrayString($this->getSortableFields()),
             $this->getMediaCodeLines($this->getMediableFields()),
-            $modelClass,
-            class_basename($modelClass),
-            lcfirst(class_basename($modelClass)),
+            $namespacedModel,
+            $model,
+            Str::camel($model),
+            class_basename($this->userProviderModel()),
         ], $class);
     }
 
