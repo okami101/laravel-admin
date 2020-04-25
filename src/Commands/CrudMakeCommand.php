@@ -189,7 +189,7 @@ class CrudMakeCommand extends GeneratorCommand
             '{{ modelVariable }}',
             '{{ user }}',
         ], [
-            $this->getArrayString($this->getFields()->keys()),
+            $this->getArrayString(['id', ...$this->getFields()->keys()]),
             $this->getArrayWithKeysString($this->getCasts()),
             $this->getArrayString($this->getTranslatableFields()),
             $this->getArrayString($this->getSearchableFields()),
