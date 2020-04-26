@@ -33,6 +33,7 @@ class {{ class }} extends Controller
                     {{ filters }}
                 ])
                 ->allowedSorts([{{ sortable }}])
+                ->allowedIncludes([{{ include }}])
                 ->exportOrPaginate()
         );
     }
@@ -45,7 +46,7 @@ class {{ class }} extends Controller
      */
     public function show({{ model }} ${{ modelVariable }})
     {
-        return new {{ model }}Resource(${{ modelVariable }});
+        return new {{ model }}Resource(${{ modelVariable }}->load([{{ include }}]));
     }
 
     /**

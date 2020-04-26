@@ -114,10 +114,6 @@ class CrudMakeCommand extends GeneratorCommand
             }
         }
 
-        if ($stub === 'controller' && $this->isMediable()) {
-            $stub .= '.mediable';
-        }
-
         return __DIR__."/../../stubs/{$stub}.stub";
     }
 
@@ -188,6 +184,7 @@ class CrudMakeCommand extends GeneratorCommand
             '{{ searchable }}',
             '{{ filters }}',
             '{{ sortable }}',
+            '{{ include }}',
             '{{ mediable }}',
             '{{ namespacedModel }}',
             '{{ model }}',
@@ -200,6 +197,7 @@ class CrudMakeCommand extends GeneratorCommand
             $this->getArrayString($this->getSearchableFields()),
             $this->getFilterableFields()->implode("\n                    "),
             $this->getArrayString($this->getSortableFields()),
+            $this->getArrayString($this->getIncludeFields()),
             $this->getMediaCodeLines($this->getMediableFields()),
             $namespacedModel,
             $model,
@@ -230,6 +228,11 @@ class CrudMakeCommand extends GeneratorCommand
     private function getSortableFields()
     {
         return collect($this->option('sortable'));
+    }
+
+    private function getIncludeFields()
+    {
+        return collect($this->option('include'));
     }
 
     private function getFilterableFields()
@@ -417,6 +420,7 @@ EOF
             ['translatable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of translatable fields'],
             ['searchable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of searchable fields'],
             ['sortable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of sortable fields'],
+            ['include', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of included related resources'],
             ['filterable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of custom filterable fields'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
