@@ -230,8 +230,16 @@ class CrudMakeCommand extends GeneratorCommand
 
     private function getFilterableFields()
     {
-        return collect($this->option('filterable'))->map(function ($field) {
-            return "AllowedFilter::partial('$field'),";
+        return collect($this->option('filterable'))->map(function ($name) {
+            $filter = 'exact';
+
+            $type = $this->getFields()->get($name);
+
+            if ($type === 'string') {
+                // Prefer partial as default SQL filter for text
+                $filter = 'partial';
+            }
+            return "AllowedFilter::$filter('$name'),";
         });
     }
 
@@ -348,8 +356,13 @@ class CrudMakeCommand extends GeneratorCommand
     {
         $model = $this->argument('name');
         $slug = Str::slug(Str::plural($model));
+        $code = "'$slug' => '{$model}Controller'";
 
         $routeFile = base_path('routes/api.php');
+        if (Str::contains($this->files->get($routeFile), $code)) {
+            return;
+        }
+
         $content = file($routeFile, FILE_IGNORE_NEW_LINES);
 
         $lines = count($content);
@@ -368,7 +381,7 @@ class CrudMakeCommand extends GeneratorCommand
             $endLine,
             0,
             <<<EOF
-        '$slug' => '{$model}Controller',
+        $code,
 EOF
         );
         $this->files->put($routeFile, implode(PHP_EOL, $content) . PHP_EOL);
