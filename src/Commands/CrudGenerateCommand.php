@@ -120,13 +120,13 @@ class CrudGenerateCommand extends Command
 
     private function getFieldSchemas($resource)
     {
-        return $this->getDatabaseFields($resource)->map(function ($field, $name) {
+        return $this->getDatabaseFields($resource)->map(function ($field, $name) use ($resource) {
             $type = $field['db']['type'] ?? 'string';
 
             /**
              * JSON required if translatable
              */
-            if (! empty($field['translatable'])) {
+            if (in_array($name, $resource['translatable'], true)) {
                 $type = 'json';
             }
 
