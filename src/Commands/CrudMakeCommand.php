@@ -212,6 +212,7 @@ class CrudMakeCommand extends GeneratorCommand
             return [$segments[0] => $segments[1]];
         });
     }
+
     private function getTranslatableFields()
     {
         return collect($this->option('translatable'));

@@ -88,10 +88,10 @@ class CrudGenerateCommand extends Command
             $this->call('crud:make', [
                 'name' => $resource['model'],
                 '--fields' => $this->getFields($resource),
-                '--translatable' => $this->getFieldNames($resource, 'translatable'),
-                '--searchable' => $this->getFieldNames($resource, 'searchable'),
-                '--sortable' => $this->getFieldNames($resource, 'sortable'),
-                '--filterable' => $this->getFieldNames($resource, 'filterable'),
+                '--translatable' => $resource['translatable'],
+                '--searchable' => $resource['searchable'],
+                '--sortable' => $resource['sortable'],
+                '--filterable' => $resource['filterable'],
                 '--mediable' => $this->getMediableFields($resource),
                 '--schema' => $this->getFieldSchemas($resource)->implode(', '),
                 '--factory' => $this->option('factory'),
@@ -104,9 +104,7 @@ class CrudGenerateCommand extends Command
     private function getDatabaseFields($resource)
     {
         return collect($resource['fields'])->filter(function ($field) {
-            $type = $field['type'] ?? 'string';
-
-            return ! in_array($type, ['file', 'image']);
+            return empty($field['excluded']);
         });
     }
 
@@ -150,25 +148,10 @@ class CrudGenerateCommand extends Command
         })->values();
     }
 
-    private function getFieldNames($resource, $filter = null)
-    {
-        return collect($resource['fields'])->filter(function ($field) use ($filter) {
-            if ($filter) {
-                return $field[$filter] ?? false;
-            }
-
-            return true;
-        })->keys();
-    }
-
     private function getMediableFields($resource)
     {
-        return collect($resource['fields'])->filter(function ($field) {
-            $type = $field['type'] ?? 'string';
-
-            return in_array($type, ['file', 'image']);
-        })->map(function ($field, $name) {
-            $multiple = $field['multiple'] ?? false;
+        return collect($resource['mediable'])->map(function ($name) use ($resource) {
+            $multiple = $resource['fields'][$name]['multiple'] ?? false;
 
             return "$name:$multiple";
         })->values();
