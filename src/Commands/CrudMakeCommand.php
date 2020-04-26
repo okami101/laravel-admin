@@ -182,6 +182,7 @@ class CrudMakeCommand extends GeneratorCommand
             '{{ casts }}',
             '{{ translatable }}',
             '{{ searchable }}',
+            '{{ filters }}',
             '{{ sortable }}',
             '{{ mediable }}',
             '{{ namespacedModel }}',
@@ -193,6 +194,7 @@ class CrudMakeCommand extends GeneratorCommand
             $this->getArrayWithKeysString($this->getCasts()),
             $this->getArrayString($this->getTranslatableFields()),
             $this->getArrayString($this->getSearchableFields()),
+            $this->getFilterableFields()->implode("\n                    "),
             $this->getArrayString($this->getSortableFields()),
             $this->getMediaCodeLines($this->getMediableFields()),
             $namespacedModel,
@@ -223,6 +225,13 @@ class CrudMakeCommand extends GeneratorCommand
     private function getSortableFields()
     {
         return collect($this->option('sortable'));
+    }
+
+    private function getFilterableFields()
+    {
+        return collect($this->option('filterable'))->map(function ($field) {
+            return "AllowedFilter::partial('$field'),";
+        });
     }
 
     private function getMediableFields()
@@ -390,6 +399,7 @@ EOF
             ['translatable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of translatable fields'],
             ['searchable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of searchable fields'],
             ['sortable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of sortable fields'],
+            ['filterable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of custom filterable fields'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],

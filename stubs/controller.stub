@@ -30,6 +30,7 @@ class {{ class }} extends Controller
                 ->allowedFilters([
                     AllowedFilter::custom('q', new SearchFilter([{{ searchable }}])),
                     AllowedFilter::exact('id'),
+                    {{ filters }}
                 ])
                 ->allowedSorts([{{ sortable }}])
                 ->exportOrPaginate()

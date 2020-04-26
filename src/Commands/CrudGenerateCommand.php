@@ -91,6 +91,7 @@ class CrudGenerateCommand extends Command
                 '--translatable' => $this->getFieldNames($resource, 'translatable'),
                 '--searchable' => $this->getFieldNames($resource, 'searchable'),
                 '--sortable' => $this->getFieldNames($resource, 'sortable'),
+                '--filterable' => $this->getFieldNames($resource, 'filterable'),
                 '--mediable' => $this->getMediableFields($resource),
                 '--schema' => $this->getFieldSchemas($resource)->implode(', '),
                 '--factory' => $this->option('factory'),
