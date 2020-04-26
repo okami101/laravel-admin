@@ -114,6 +114,10 @@ class CrudMakeCommand extends GeneratorCommand
             }
         }
 
+        if ($stub === 'controller' && $this->isMediable()) {
+            $stub .= '.mediable';
+        }
+
         return __DIR__."/../../stubs/{$stub}.stub";
     }
 
