@@ -132,10 +132,6 @@ class CrudGenerateCommand extends Command
 
             $schema = "$name:$type";
 
-            if (empty($field['required'])) {
-                $schema .= ':nullable';
-            }
-
             /**
              * Specific database attribute
              */
