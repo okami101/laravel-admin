@@ -13,7 +13,7 @@ class {{ class }} extends Model implements HasMedia
     use RequestMediaTrait;
     use RequestTranslatableTrait;
 
-    protected $fillable = [{{ fields }}];
+    protected $fillable = [{{ fillable }}];
 
     protected $casts = [{{ casts }}];
 

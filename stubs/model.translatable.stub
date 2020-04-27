@@ -9,7 +9,7 @@ class {{ class }} extends Model
 {
     use RequestTranslatableTrait;
 
-    protected $fillable = [{{ fields }}];
+    protected $fillable = [{{ fillable }}];
 
     protected $casts = [{{ casts }}];
 

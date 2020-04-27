@@ -112,7 +112,7 @@ class CrudGenerateCommand extends Command
     private function getDatabaseFields($resource)
     {
         return collect($resource['fields'] ?? [])->filter(function ($field) {
-            return empty($field['excluded']);
+            return empty($field['excluded']) && empty($field['timestamp']);
         });
     }
 
