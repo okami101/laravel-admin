@@ -24,19 +24,25 @@ class BaseResource extends JsonResource
          * Translatable API generator
          */
         if (property_exists($this->resource, 'translatable')) {
-            collect($this->resource->translatable)->each(function ($field) use (&$attributes) {
-                $translated = $this->resource->getTranslation(
-                    $field,
-                    request()->get('locale') ?: app()->getLocale()
-                );
+            collect($this->resource->translatable)
+                ->each(function ($field) use (&$attributes) {
+                    // Be sure that field is not hidden
+                    if (in_array($field, $this->resource->getHidden(), true)) {
+                        return;
+                    }
 
-                if (! empty($translated)) {
-                    $attributes[$field] = $translated;
+                    $translated = $this->resource->getTranslation(
+                        $field,
+                        request()->get('locale') ?: app()->getLocale()
+                    );
 
-                    return;
-                }
-                $attributes[$field] = null;
-            });
+                    if (! empty($translated)) {
+                        $attributes[$field] = $translated;
+
+                        return;
+                    }
+                    $attributes[$field] = null;
+                });
         }
 
         /**

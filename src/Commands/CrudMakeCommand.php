@@ -178,7 +178,6 @@ class CrudMakeCommand extends GeneratorCommand
         $class = parent::replaceClass($stub, $name);
 
         return str_replace([
-            '{{ fields }}',
             '{{ fillable }}',
             '{{ casts }}',
             '{{ translatable }}',
@@ -192,13 +191,12 @@ class CrudMakeCommand extends GeneratorCommand
             '{{ modelVariable }}',
             '{{ user }}',
         ], [
-            $this->getArrayString(['id', ...$this->getFields()->keys(), 'created_at', 'updated_at']),
             $this->getArrayString($this->getFields()->keys()),
             $this->getArrayWithKeysString($this->getCasts()),
             $this->getArrayString($this->getTranslatableFields()),
             $this->getArrayString($this->getSearchableFields()),
             $this->getFilterableFields()->implode("\n                    "),
-            $this->getArrayString(['id', ...$this->getSortableFields(), 'created_at', 'updated_at']),
+            $this->getArrayString($this->getSortableFields()),
             $this->getArrayString($this->getIncludeFields()),
             $this->getMediaCodeLines($this->getMediableFields()),
             $namespacedModel,

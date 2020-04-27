@@ -26,7 +26,6 @@ class {{ class }} extends Controller
     {
         return {{ model }}Resource::collection(
             QueryBuilder::for({{ model }}::class)
-                ->allowedFields([{{ fields }}])
                 ->allowedFilters([
                     AllowedFilter::custom('q', new SearchFilter([{{ searchable }}])),
                     AllowedFilter::exact('id'),
