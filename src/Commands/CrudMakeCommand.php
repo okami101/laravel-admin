@@ -198,7 +198,7 @@ class CrudMakeCommand extends GeneratorCommand
             $this->getArrayString($this->getTranslatableFields()),
             $this->getArrayString($this->getSearchableFields()),
             $this->getFilterableFields()->implode("\n                    "),
-            $this->getArrayString($this->getSortableFields()),
+            $this->getArrayString(['id', ...$this->getSortableFields(), 'created_at', 'updated_at']),
             $this->getArrayString($this->getIncludeFields()),
             $this->getMediaCodeLines($this->getMediableFields()),
             $namespacedModel,
