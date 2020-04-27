@@ -77,7 +77,7 @@ class CrudMakeCommand extends GeneratorCommand
         /**
          * Generate resource data (migration, factory and seeder)
          */
-        if ($this->option('schema')) {
+        if ($this->option('migration')) {
             $this->createMigration();
         }
 
@@ -424,7 +424,8 @@ EOF
             ['sortable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of sortable fields'],
             ['include', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of included related resources'],
             ['filterable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of custom filterable fields'],
-            ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
+            ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'],
+            ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory file for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
         ];

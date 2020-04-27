@@ -100,8 +100,9 @@ class CrudGenerateCommand extends Command
                 '--sortable' => $resource['sortable'] ?? [],
                 '--include' => $resource['include'] ?? [],
                 '--filterable' => $resource['filterable'] ?? [],
-                '--mediable' => $this->getMediableFields($resource),
+                '--mediable' => $this->getMediableFields($resource)->toArray(),
                 '--schema' => $this->getFieldSchemas($resource)->implode(', '),
+                '--migration' => $this->option('migration'),
                 '--factory' => $this->option('factory'),
                 '--seed' => $this->option('seed'),
                 '--force' => $this->option('force'),
@@ -128,6 +129,7 @@ class CrudGenerateCommand extends Command
     private function getFieldSchemas($resource)
     {
         return $this->getDatabaseFields($resource)->map(function ($field, $name) use ($resource) {
+            $name = $field['db']['name'] ?? $name;
             $type = $field['db']['type'] ?? 'string';
 
             /**
@@ -182,6 +184,7 @@ class CrudGenerateCommand extends Command
     {
         return [
             ['name', null, InputOption::VALUE_OPTIONAL, 'Name of model to import, if not set, all will be imported'],
+            ['migration', 'm', InputOption::VALUE_NONE, 'Generate migration schema with pre-generated fields'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
