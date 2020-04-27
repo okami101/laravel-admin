@@ -181,7 +181,7 @@ class CrudGenerateCommand extends Command
     protected function getOptions()
     {
         return [
-            ['name', null, InputOption::VALUE_OPTIONAL, 'Name of model to import'],
+            ['name', null, InputOption::VALUE_OPTIONAL, 'Name of model to import, if not set, all will be imported'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
