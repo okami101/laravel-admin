@@ -84,15 +84,22 @@ class CrudGenerateCommand extends Command
     {
         $descriptor = Yaml::parseFile($file);
 
-        foreach ($descriptor as $name => $resource) {
+        foreach ($descriptor as $resource) {
+            /**
+             * If set, only import specified name
+             */
+            if (($name = $this->option('name')) && $name !== $resource['model']) {
+                continue;
+            }
+
             $this->call('crud:make', [
                 'name' => $resource['model'],
                 '--fields' => $this->getFields($resource),
-                '--translatable' => $resource['translatable'],
-                '--searchable' => $resource['searchable'],
-                '--sortable' => $resource['sortable'],
-                '--include' => $resource['include'],
-                '--filterable' => $resource['filterable'],
+                '--translatable' => $resource['translatable'] ?? [],
+                '--searchable' => $resource['searchable'] ?? [],
+                '--sortable' => $resource['sortable'] ?? [],
+                '--include' => $resource['include'] ?? [],
+                '--filterable' => $resource['filterable'] ?? [],
                 '--mediable' => $this->getMediableFields($resource),
                 '--schema' => $this->getFieldSchemas($resource)->implode(', '),
                 '--factory' => $this->option('factory'),
@@ -104,7 +111,7 @@ class CrudGenerateCommand extends Command
 
     private function getDatabaseFields($resource)
     {
-        return collect($resource['fields'])->filter(function ($field) {
+        return collect($resource['fields'] ?? [])->filter(function ($field) {
             return empty($field['excluded']);
         });
     }
@@ -126,7 +133,7 @@ class CrudGenerateCommand extends Command
             /**
              * JSON required if translatable
              */
-            if (in_array($name, $resource['translatable'], true)) {
+            if (in_array($name, $resource['translatable'] ?? [], true)) {
                 $type = 'json';
             }
 
@@ -147,7 +154,7 @@ class CrudGenerateCommand extends Command
 
     private function getMediableFields($resource)
     {
-        return collect($resource['mediable'])->map(function ($name) use ($resource) {
+        return collect($resource['mediable'] ?? [])->map(function ($name) use ($resource) {
             $multiple = $resource['fields'][$name]['multiple'] ?? false;
 
             return "$name:$multiple";
@@ -174,6 +181,7 @@ class CrudGenerateCommand extends Command
     protected function getOptions()
     {
         return [
+            ['name', null, InputOption::VALUE_OPTIONAL, 'Name of model to import'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],
             ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],

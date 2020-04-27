@@ -361,8 +361,8 @@ class CrudMakeCommand extends GeneratorCommand
      */
     protected function createRoutes()
     {
-        $model = $this->argument('name');
-        $slug = Str::slug(Str::plural($model));
+        $model = class_basename($this->argument('name'));
+        $slug = Str::slug(Str::snake(Str::pluralStudly($model)));
         $code = "'$slug' => '{$model}Controller'";
 
         $routeFile = base_path('routes/api.php');
