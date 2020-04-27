@@ -120,6 +120,7 @@ class CrudGenerateCommand extends Command
     private function getFields($resource)
     {
         return $this->getDatabaseFields($resource)->map(function ($field, $name) {
+            $name = $field['db']['name'] ?? $name;
             $type = $field['type'] ?? 'string';
 
             return "$name:$type";
