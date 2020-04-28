@@ -72,7 +72,8 @@ You can also directly provide a directory which contains all necessary YAML reso
 For supported YAML schema, see [full documentation](https://vtec.okami101.io).
 
 > For both commands, you can add `-mfs` options to generate full migration file with all pre-generated fields, in addition to factory and seeder files.  
-> In case of model relation, even if foreign keys can be generated in migration file by `foreign` on schema, you must manually add related eloquent relation in you model.
+> In case of model relation, even if foreign keys can be generated in migration file by `foreign` on schema, you must manually add related eloquent relation in you model.  
+> For server-side validation, you must manually add rules inside store and update generated request files.
 
 ## Full documentation
 
