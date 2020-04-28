@@ -238,7 +238,12 @@ class CrudMakeCommand extends GeneratorCommand
     private function getFilterableFields()
     {
         return collect($this->option('filterable'))->map(function ($field) {
-            [$name, $internal] = explode(':', $field);
+            $name = $field;
+            $segments = explode(':', $field);
+
+            if (count($segments) === 2) {
+                [$name, $internal] = $segments;
+            }
 
             $filter = 'exact';
 
@@ -249,9 +254,10 @@ class CrudMakeCommand extends GeneratorCommand
                 $filter = 'partial';
             }
 
-            if ($internal) {
+            if (! empty($internal)) {
                 return "AllowedFilter::$filter('$name', '$internal'),";
             }
+
             return "AllowedFilter::$filter('$name'),";
         });
     }

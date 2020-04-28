@@ -4,6 +4,7 @@ namespace Vtec\Crud\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Yaml\Yaml;
@@ -84,16 +85,18 @@ class CrudGenerateCommand extends Command
     {
         $descriptor = Yaml::parseFile($file);
 
-        foreach ($descriptor as $resource) {
+        foreach ($descriptor['resources'] as $key => $resource) {
+            $model = Str::studly(Str::singular($key));
+
             /**
              * If set, only import specified name
              */
-            if (($name = $this->option('name')) && $name !== $resource['model']) {
+            if (($name = $this->option('name')) && $name !== $model) {
                 continue;
             }
 
             $this->call('crud:make', [
-                'name' => $resource['model'],
+                'name' => $model,
                 '--fields' => $this->getFields($resource),
                 '--translatable' => $resource['translatable'] ?? [],
                 '--searchable' => $resource['searchable'] ?? [],
