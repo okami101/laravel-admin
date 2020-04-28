@@ -237,7 +237,9 @@ class CrudMakeCommand extends GeneratorCommand
 
     private function getFilterableFields()
     {
-        return collect($this->option('filterable'))->map(function ($name) {
+        return collect($this->option('filterable'))->map(function ($field) {
+            [$name, $internal] = explode(':', $field);
+
             $filter = 'exact';
 
             $type = $this->getFields()->get($name);
@@ -245,6 +247,10 @@ class CrudMakeCommand extends GeneratorCommand
             if ($type === 'string') {
                 // Prefer partial as default SQL filter for text
                 $filter = 'partial';
+            }
+
+            if ($internal) {
+                return "AllowedFilter::$filter('$name', '$internal'),";
             }
             return "AllowedFilter::$filter('$name'),";
         });
@@ -421,7 +427,7 @@ EOF
             ['searchable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of searchable fields'],
             ['sortable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of sortable fields'],
             ['include', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of included related resources'],
-            ['filterable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of custom filterable fields'],
+            ['filterable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of custom filterable fields (field:internal)'],
             ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory file for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],

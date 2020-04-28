@@ -99,7 +99,7 @@ class CrudGenerateCommand extends Command
                 '--searchable' => $resource['searchable'] ?? [],
                 '--sortable' => $resource['sortable'] ?? [],
                 '--include' => $resource['include'] ?? [],
-                '--filterable' => $resource['filterable'] ?? [],
+                '--filterable' => $this->getFiltrableFields($resource)->toArray(),
                 '--mediable' => $this->getMediableFields($resource)->toArray(),
                 '--schema' => $this->getFieldSchemas($resource)->implode(', '),
                 '--migration' => $this->option('migration'),
@@ -152,6 +152,18 @@ class CrudGenerateCommand extends Command
             }
 
             return $schema;
+        })->values();
+    }
+
+    private function getFiltrableFields($resource)
+    {
+        return collect($resource['filterable'] ?? [])->map(function ($name) use ($resource) {
+            $internal = $resource['fields'][$name]['db']['name'] ?? null;
+
+            if ($internal) {
+                return "$name:$internal";
+            }
+            return $name;
         })->values();
     }
 
