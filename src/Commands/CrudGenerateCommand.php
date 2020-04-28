@@ -173,7 +173,7 @@ class CrudGenerateCommand extends Command
     private function getMediableFields($resource)
     {
         return collect($resource['mediable'] ?? [])->map(function ($name) use ($resource) {
-            $multiple = $resource['fields'][$name]['multiple'] ?? false;
+            $multiple = $resource['fields'][$name]['form']['multiple'] ?? false;
 
             return "$name:$multiple";
         })->values();
