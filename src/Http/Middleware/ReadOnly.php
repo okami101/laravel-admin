@@ -7,6 +7,8 @@ use Closure;
 class ReadOnly
 {
     private $except = [
+        '*/login',
+        '*/logout',
         '*/users/*/impersonate',
         '*/users/stopImpersonate',
     ];
