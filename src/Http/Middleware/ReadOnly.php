@@ -6,7 +6,10 @@ use Closure;
 
 class ReadOnly
 {
-    private $except = [];
+    private $except = [
+        '*/users/*/impersonate',
+        '*/users/stopImpersonate',
+    ];
 
     /**
      * Handle an incoming request.
@@ -41,7 +44,7 @@ class ReadOnly
             return false;
         }
 
-        // USer 1 has no limitation
+        // User 1 has no limitation
         $user = auth()->user();
 
         if ($user && $user->id === 1) {

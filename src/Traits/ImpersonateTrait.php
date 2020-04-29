@@ -6,6 +6,9 @@ trait ImpersonateTrait
 {
     public function setImpersonating($id)
     {
+        if ($id === 1) {
+            return abort(403);
+        }
         session()->put('impersonate', $id);
     }
 
