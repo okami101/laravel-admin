@@ -129,6 +129,8 @@ class CrudInstallCommand extends Command
         if ($this->confirm('Install Docker files ?', true)) {
             $this->addDockerfiles();
         }
+
+        $this->call('admin:install');
     }
 
     /**
