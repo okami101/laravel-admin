@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\QueryBuilder\QueryBuilder;
-use Vtec\Crud\Commands\AdminInstallCommand;
+use Vtec\Crud\Commands\UIInstallCommand;
 use Vtec\Crud\Commands\CrudGenerateCommand;
-use Vtec\Crud\Commands\CrudInstallCommand;
+use Vtec\Crud\Commands\AdminInstallCommand;
 use Vtec\Crud\Commands\CrudMakeCommand;
 use Vtec\Crud\Commands\UserCreateCommand;
 
@@ -41,10 +41,10 @@ class CrudServiceProvider extends ServiceProvider
             ], 'phpcs');
 
             $this->commands([
-                CrudInstallCommand::class,
+                AdminInstallCommand::class,
                 CrudMakeCommand::class,
                 CrudGenerateCommand::class,
-                AdminInstallCommand::class,
+                UIInstallCommand::class,
                 UserCreateCommand::class,
             ]);
         }

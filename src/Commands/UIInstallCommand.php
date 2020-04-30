@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-class VueInstallCommand extends Command
+class UIInstallCommand extends Command
 {
     /**
      * The name and signature of the console command.

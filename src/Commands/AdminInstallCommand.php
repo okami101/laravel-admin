@@ -9,14 +9,14 @@ use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\Process\Process;
 use Vtec\Crud\CrudServiceProvider;
 
-class CrudInstallCommand extends Command
+class AdminInstallCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'crud:install';
+    protected $name = 'admin:install';
 
     /**
      * The console command description.
@@ -130,7 +130,7 @@ class CrudInstallCommand extends Command
             $this->addDockerfiles();
         }
 
-        $this->call('admin:vue-cli:install');
+        $this->call('admin:ui');
     }
 
     /**
