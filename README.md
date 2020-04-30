@@ -94,7 +94,7 @@ Route::apiResources([
 
 ### [YAML based generation](#yaml)
 
-For even more auto generation power, and because `crud:make` can be exhausting to write with all options, a direct resource yaml file descriptor can be used via `php artisan crud:generate my-new-resource.yml`.  
+For even more auto generation power, and because `crud:make` can be exhausting to write with all options, a direct resource yaml file descriptor can be used via `php artisan crud:yaml my-new-resource.yml`.  
 You can also directly provide a directory which contains all necessary YAML resource descriptor files as needed.
 
 Follow [tutorial](https://vtec.okami101.io/tutorial) for more details on what based YAML generation can offer.

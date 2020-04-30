@@ -9,14 +9,14 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Yaml\Yaml;
 
-class CrudGenerateCommand extends Command
+class CrudYamlCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'crud:generate';
+    protected $name = 'crud:yaml';
 
     /**
      * The console command description.
