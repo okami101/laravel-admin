@@ -18,13 +18,13 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 * Quick resource api generator commands including direct YAML descriptor file !
 * Preconfigured docker files included with ready to use MySQL, phpMyadmin, Nginx and Redis !
 
-## Requirements
+## [Requirements](#requirements)
 
 * You must have at least PHP 7.4 (required by spatie media library package).
 * Install [Vue CLI](https://cli.vuejs.org/guide/installation.html).
 * Should be installed on fresh laravel 7 installation.
 
-## Installation
+## [Installation](#installation)
 
 Simply init your project by this simple 2 steps :
 
