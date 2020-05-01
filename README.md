@@ -1,7 +1,6 @@
 # Vtec Laravel Crud
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
-[![Total Downloads](https://img.shields.io/packagist/dt/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 [![License](https://img.shields.io/packagist/l/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 
 Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
@@ -21,9 +20,9 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 
 ## Requirements
 
-* You must have at least PHP 7.4 (required by spatie media library package)  
-* Install [Vue CLI](https://cli.vuejs.org/guide/installation.html)
-* Should be installed on fresh laravel 7 installation
+* You must have at least PHP 7.4 (required by spatie media library package).
+* Install [Vue CLI](https://cli.vuejs.org/guide/installation.html).
+* Should be installed on fresh laravel 7 installation.
 
 ## Installation
 
