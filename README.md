@@ -20,13 +20,13 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 * Quick resource api generator commands including direct YAML descriptor file !
 * Preconfigured docker files included with ready to use MySQL, phpMyadmin, Nginx and Redis !
 
-## [Installation](#installation)
+## Installation
 
 Simply init your project by this simple 2 steps :
 
 ```bash
 composer require vtec/laravel-crud
-php artisan admin:install
+php artisan vtec:install
 ```
 
 Simply follow wizard. The installer will preconfigure all asked packages for you and generate all minimal boilerplate code for quick start, including auth, users controller with impersonation.  
@@ -45,7 +45,7 @@ php artisan storage:link
 php artisan migrate:fresh --seed
 ```
 
-Finally create your first user by `php artisan admin:user:create admin@example.com`. You will be prompted for the user name and password.
+Finally create your first user by `php artisan vtec:user admin@example.com`. You will be prompted for the user name and password.
 
 > If you use docker, use `docker-compose exec laravel` before each command.  
 > By default admin URL is configured at [http://localhost:8080](http://localhost:8080) which is default Vue CLI dev serve URL.  
@@ -60,8 +60,6 @@ cd admin
 vue add vtec-admin # Will generated all minimal admin boilerplate as well as UI crud commands
 yarn serve
 ```
-
-> See [Vue CLI plugin installation section](https://www.npmjs.com/package/vue-cli-plugin-vtec-admin#installation) for more detail of what this plugin do.
 
 ## Scaffold API crud resources
 

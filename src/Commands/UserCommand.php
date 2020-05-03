@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\InputArgument;
 
-class UserCreateCommand extends Command
+class UserCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'admin:user:create';
+    protected $name = 'vtec:user';
 
     /**
      * The console command description.

@@ -6,14 +6,14 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-class UIInstallCommand extends Command
+class UICommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'admin:ui';
+    protected $name = 'vtec:ui';
 
     /**
      * The console command description.

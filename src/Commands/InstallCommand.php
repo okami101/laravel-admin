@@ -9,14 +9,14 @@ use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\Process\Process;
 use Vtec\Crud\CrudServiceProvider;
 
-class AdminInstallCommand extends Command
+class InstallCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'admin:install';
+    protected $name = 'vtec:install';
 
     /**
      * The console command description.
