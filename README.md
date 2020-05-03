@@ -5,6 +5,8 @@
 
 Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
 
+> See [dedicated guide](https://vtec.okami101.io/guide/laravel)
+
 ## Features
 
 * On-asking installer for quick start by optional packages selection, including associated Vue CLI admin project !
@@ -17,12 +19,6 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 * User impersonation with dedicated middleware.
 * Quick resource api generator commands including direct YAML descriptor file !
 * Preconfigured docker files included with ready to use MySQL, phpMyadmin, Nginx and Redis !
-
-## [Requirements](#requirements)
-
-* You must have at least PHP 7.4 (required by spatie media library package).
-* Install [Vue CLI](https://cli.vuejs.org/guide/installation.html).
-* Should be installed on fresh laravel 7 installation.
 
 ## [Installation](#installation)
 
@@ -67,44 +63,19 @@ yarn serve
 
 > See [Vue CLI plugin installation section](https://www.npmjs.com/package/vue-cli-plugin-vtec-admin#installation) for more detail of what this plugin do.
 
-## [Scaffold API crud resources](#scaffolding)
+## Scaffold API crud resources
 
-Use `php artisan crud:make [MyNewResource] [options]` with many as option as possible. This will scaffold following files :
+You'll got 2 new npm scripts :
 
-* Model
-* Controller with all crud operations
-* Policy for authorization
-* Store and update requests for validation rules (empty by default, so don't forget to add your own rules)
-* Http Resource for API data transformer
-* Migration with all pre-generated fields (including foreigns !)
-* Factory and seeder (empty by default)
+* `php artisan crud:make [MyNewResource] [options]` : Main API crud command maker.
+* `php artisan crud:yaml my-new-resource.yml` : Superset of previous command which use a YAML file descriptor.
 
-Launch `php artisan crud:make --help` for all options documentation.  
-Don't hesitate to use `php artisan ide-helper:models` after in order to have all fields Model autocompletion enabled !
+> Launch `php artisan crud:make --help` for all options documentation.  
+> See [dedicated guide](https://vtec.okami101.io/guide/generators), UI CRUD pages generators included.
 
-In addition, api routes should be registered automatically at `routes/api.php` file in this place :
+## Scaffold UI CRUD pages
 
-```php
-Route::apiResources([
-    /** previous entities */
-    'my_new_resource' => 'MyNewResourceController',
-]);
-```
-
-### [YAML based generation](#yaml)
-
-For even more auto generation power, and because `crud:make` can be exhausting to write with all options, a direct resource yaml file descriptor can be used via `php artisan crud:yaml my-new-resource.yml`.  
-You can also directly provide a directory which contains all necessary YAML resource descriptor files as needed.
-
-Follow [tutorial](https://vtec.okami101.io/tutorial) for more details on what based YAML generation can offer.
-
-> For both generator commands, you may add `-mfs` options to generate full migration file with all pre-generated fields, in addition to factory and seeder files.  
-> In case of model relation, even if foreign keys can be generated in migration file by `foreign` on schema, you must manually add related eloquent relation in you model.  
-> For server-side validation, you must manually add rules inside store and update generated request files.
-
-## Scaffold UI pages
-
-See separated [Vtec Admin Vue CLI plugin doc](https://www.npmjs.com/package/vue-cli-plugin-vtec-admin#scaffolding).
+See [separated guide](https://vtec.okami101.io/guide/generators#ui).
 
 ## Used dependencies
 
