@@ -31,10 +31,7 @@ class BaseResource extends JsonResource
                         return;
                     }
 
-                    $translated = $this->resource->getTranslation(
-                        $field,
-                        request()->get('locale') ?: app()->getLocale()
-                    );
+                    $translated = $this->resource->$field;
 
                     if (! empty($translated)) {
                         $attributes[$field] = $translated;

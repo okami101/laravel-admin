@@ -16,6 +16,6 @@ trait RequestTranslatableTrait
 
     protected function getLocale(): string
     {
-        return request()->get('locale') ?: config('app.locale');
+        return request()->get('locale') ?: app()->getLocale();
     }
 }
