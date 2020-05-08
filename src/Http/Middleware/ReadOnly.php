@@ -25,7 +25,7 @@ class ReadOnly
     {
         if ($this->isReadOnly($request)) {
             if ($request->expectsJson()) {
-                return response()->json(['message' => __('crud::admin.read_only')], 403);
+                return response()->json(['message' => __('crud::admin.read_only')], 405);
             }
 
             return redirect(config('admin.url'));
