@@ -61,7 +61,7 @@ vue add vtec-admin # Will generated all minimal admin boilerplate as well as UI 
 yarn serve
 ```
 
-## Scaffold API crud resources
+## Scaffold API CRUD resources and UI pages
 
 You'll got 2 new npm scripts :
 
@@ -69,11 +69,7 @@ You'll got 2 new npm scripts :
 * `php artisan crud:yaml my-new-resource.yml` : Superset of previous command which use a YAML file descriptor.
 
 > Launch `php artisan crud:make --help` for all options documentation.  
-> See [dedicated guide](https://vtec.okami101.io/guide/generators), UI CRUD pages generators included.
-
-## Scaffold UI CRUD pages
-
-See [separated guide](https://vtec.okami101.io/guide/generators#ui).
+> See [dedicated guide](https://vtec.okami101.io/guide/laravel) for further details.
 
 ## Used dependencies
 
