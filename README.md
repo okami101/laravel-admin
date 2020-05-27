@@ -13,6 +13,7 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 * Many optional dev packages proposed by the installer as [IDE Helper](https://github.com/barryvdh/laravel-ide-helper), PHP CS Fixer with Laravel preset, [Clockwork](https://github.com/itsgoingd/clockwork), [Laracasts Generators](https://github.com/laracasts/Laravel-5-Generators-Extended).
 * [Laravel Sanctum](https://github.com/laravel/sanctum) for admin SPA auth.
 * [Laravel elFinder](https://github.com/barryvdh/laravel-elfinder) for direct disk file management with Wysiwyg bridges.
+* Removable image upload controller compatible with TinyMCE 5.
 * Media support thanks to [spatie/laravel-medialibrary](https://github.com/spatie/laravel-medialibrary).
 * Translatable model support thanks to [spatie/laravel-translatable](https://github.com/dimsav/laravel-translatable).
 * Simple account controller for profile editing and password change.

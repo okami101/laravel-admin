@@ -32,4 +32,14 @@ class AdminRouteMethods
             $this->post('users/stopImpersonate', 'UserController@stopImpersonate');
         };
     }
+
+    /**
+     * Image upload from Wysiwyg
+     */
+    public function upload()
+    {
+        return function () {
+            $this->post('upload', '\Vtec\Crud\Http\Controllers\UploadController@index');
+        };
+    }
 }
