@@ -37,8 +37,8 @@ trait RequestMediaTrait
                 /**
                  * Media to add
                  */
-                if (request()->hasFile("{$collection->name}_file")) {
-                    $model->addMultipleMediaFromRequest(["{$collection->name}_file"])
+                if (request()->hasFile($collection->name)) {
+                    $model->addMultipleMediaFromRequest([$collection->name])
                         ->each(function (FileAdder $file) use ($collection) {
                             $file->toMediaCollection($collection->name);
                         });
