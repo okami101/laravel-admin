@@ -5,7 +5,7 @@
 
 Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
 
-> See [dedicated guide](https://vtec.okami101.io/guide/laravel)
+> See [dedicated guide](https://vtec.okami101.io/guide/laravel.html)
 
 ## Features
 
@@ -30,16 +30,19 @@ composer require vtec/laravel-crud
 php artisan vtec:install
 ```
 
-Simply follow wizard. The installer will preconfigure all asked packages for you and generate all minimal boilerplate code for quick start, including auth, users controller with impersonation.  
+Simply follow wizard. The installer will preconfigure all asked packages for you and generate all minimal boilerplate code for quick start, including auth, users controller with impersonation.
+
 Laravel Sanctum is ready to use for [Vtec Admin](https://github.com/okami101/vtec-admin).
 
 At the end of installation, a full ready Vue CLI Admin project will be installed inside `admin` subfolder (default) with all required dependencies by using [this preset](preset.json).
 
 ### Run backend
 
-After the installation, if you selected docker, simply launch `docker-compose up`. Don't forget to adapt your environments variables with those outputted by installer when finished.
+After the installation, if you have selected docker, simply launch `docker-compose up`. Don't forget to adapt your environments variables with those outputted by installer when finished. By default API run at [http://localhost:8000](http://localhost:8000).
 
-Then you just have to setup laravel installation as normal :
+> If you use docker, use `docker-compose exec laravel` before each next artisan commands.
+
+Then you just have to setup laravel database installation :
 
 ```bash
 php artisan storage:link
@@ -48,29 +51,28 @@ php artisan migrate:fresh --seed
 
 Finally create your first user by `php artisan vtec:user admin@example.com`. You will be prompted for the user name and password.
 
-> If you use docker, use `docker-compose exec laravel` before each command.  
 > By default admin URL is configured at [http://localhost:8080](http://localhost:8080) which is default Vue CLI dev serve URL.  
-> Dont forget to edit it on production. Just edit ADMIN_URL environment variable for that.
+> Don't forget to change it on production by adapting `ADMIN_URL` environment variable.
 
 ### Run admin UI
-  
-Finish UI installation by install dedicated [Vtec Admin Vue CLI plugin](https://www.npmjs.com/package/vue-cli-plugin-vtec-admin) and run it by this commands :
+
+Finish UI installation by doing a first commit and installing dedicated [Vtec Admin Vue CLI plugin](https://www.npmjs.com/package/vue-cli-plugin-vtec-admin) :
 
 ```bash
 cd admin
 vue add vtec-admin # Will generated all minimal admin boilerplate as well as UI crud commands
-yarn serve
+yarn serve # Run Vue CLI project
 ```
 
 ## Scaffold API CRUD resources and UI pages
 
 You'll got 2 new npm scripts :
 
-* `php artisan crud:make [MyNewResource] [options]` : Main API crud command maker.
+* `php artisan crud:make MyNewResource [options]` : Main API crud command maker.
 * `php artisan crud:yaml my-new-resource.yml` : Superset of previous command which use a YAML file descriptor.
 
 > Launch `php artisan crud:make --help` for all options documentation.  
-> See [dedicated guide](https://vtec.okami101.io/guide/laravel) for further details.
+> See [dedicated guide](https://vtec.okami101.io/guide/laravel.html) for further details.
 
 ## Used dependencies
 
