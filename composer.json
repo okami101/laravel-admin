@@ -1,9 +1,9 @@
 {
     "name": "vtec/laravel-crud",
-    "description": "Api based crud generator for Laravel.",
+    "description": "API crud generator for Laravel.",
     "keywords": [
         "vtec",
-        "vtec-crud",
+        "crud",
         "admin",
         "laravel"
     ],
