@@ -56,7 +56,7 @@ Finally create your first user by `php artisan vtec:user admin@example.com`. You
 
 ### Run admin UI
 
-Finish UI installation by doing a first commit and installing dedicated [Vtec Admin Vue CLI plugin](https://www.npmjs.com/package/vue-cli-plugin-vtec-admin) :
+Finish UI installation by doing a first commit and installing dedicated [Vtec Admin Vue CLI plugin](https://npm.okami101.io/-/web/detail/vue-cli-plugin-vtec-admin) :
 
 ```bash
 cd admin
