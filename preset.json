@@ -29,6 +29,10 @@
             "useAlaCarte": true,
             "usePolyfill": true,
             "locale": "en"
+        },
+        "vue-cli-plugin-vtec-admin": {
+            "dataProvider": "laravel",
+            "authProvider": "sanctum"
         }
     },
     "cssPreprocessor": "dart-sass",
