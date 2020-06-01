@@ -34,6 +34,8 @@
             "dataProvider": "laravel",
             "authProvider": "sanctum",
             "apiURL": "http://localhost:8000",
+            "users": true,
+            "materialTheme": true,
             "staticDashboard": true
         }
     },
