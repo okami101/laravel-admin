@@ -17,7 +17,7 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 * Simple account controller for profile editing and password change.
 * User impersonation with dedicated middleware.
 * Quick resource api generator commands including direct YAML descriptor file !
-* Preconfigured docker files included with ready to use MySQL, phpMyadmin, Nginx and Redis !
+* Pre configured docker files included with ready to use MySQL, phpMyAdmin, Nginx and Redis !
 
 ## Installation
 
