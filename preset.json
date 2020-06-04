@@ -36,6 +36,7 @@
             "apiURL": "http://localhost:8000",
             "locales": ["en", "fr"],
             "users": true,
+            "impersonation": true,
             "materialTheme": true,
             "staticDashboard": true
         }
