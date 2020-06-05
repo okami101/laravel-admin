@@ -38,6 +38,7 @@
             "users": true,
             "impersonation": true,
             "materialTheme": true,
+            "profilePage": true,
             "staticDashboard": true
         }
     },
