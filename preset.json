@@ -35,11 +35,10 @@
             "authProvider": "sanctum",
             "apiURL": "http://localhost:8000",
             "locales": ["en", "fr"],
+            "profile": true,
             "users": true,
             "impersonation": true,
-            "materialTheme": true,
-            "profilePage": true,
-            "staticDashboard": true
+            "material": true
         }
     },
     "cssPreprocessor": "dart-sass",
