@@ -214,6 +214,10 @@ class CrudMakeCommand extends GeneratorCommand
             return collect();
         }
 
+        if (is_array($value)) {
+            return collect($value);
+        }
+
         return collect(array_map('trim', explode(',', $value)));
     }
 
