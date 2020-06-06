@@ -103,13 +103,13 @@ class CrudMakeCommand extends GeneratorCommand
             /**
              * Take specific stubs
              */
-            if (! $this->isMediable() && $this->isTranslatable()) {
+            if (! $this->hasMedia() && $this->isTranslatable()) {
                 $stub .= '.translatable';
             }
-            if ($this->isMediable() && ! $this->isTranslatable()) {
-                $stub .= '.mediable';
+            if ($this->hasMedia() && ! $this->isTranslatable()) {
+                $stub .= '.media';
             }
-            if (! $this->isMediable() && ! $this->isTranslatable()) {
+            if (! $this->hasMedia() && ! $this->isTranslatable()) {
                 $stub .= '.plain';
             }
         }
@@ -154,9 +154,9 @@ class CrudMakeCommand extends GeneratorCommand
         return $this->stubs[$this->type];
     }
 
-    private function isMediable()
+    private function hasMedia()
     {
-        return ! empty($this->option('mediable'));
+        return ! empty($this->option('media'));
     }
 
     private function isTranslatable()
@@ -185,7 +185,7 @@ class CrudMakeCommand extends GeneratorCommand
             '{{ filters }}',
             '{{ sortable }}',
             '{{ include }}',
-            '{{ mediable }}',
+            '{{ media }}',
             '{{ namespacedModel }}',
             '{{ model }}',
             '{{ modelVariable }}',
@@ -198,7 +198,7 @@ class CrudMakeCommand extends GeneratorCommand
             $this->getFilterableFields()->implode("\n                    "),
             $this->getArrayString($this->getSortableFields()),
             $this->getArrayString($this->getIncludeFields()),
-            $this->getMediaCodeLines($this->getMediableFields()),
+            $this->getMediaCodeLines($this->getMediaFields()),
             $namespacedModel,
             $model,
             Str::camel($model),
@@ -206,9 +206,20 @@ class CrudMakeCommand extends GeneratorCommand
         ], $class);
     }
 
+    private function getFormattedInputArray($input)
+    {
+        $value = $this->option($input);
+
+        if (empty($value)) {
+            return collect();
+        }
+
+        return collect(array_map('trim', explode(',', $value)));
+    }
+
     private function getFields()
     {
-        return collect($this->option('fields'))->mapWithKeys(function ($field) {
+        return $this->getFormattedInputArray('schema')->mapWithKeys(function ($field) {
             $segments = explode(':', $field);
 
             return [$segments[0] => $segments[1]];
@@ -217,27 +228,27 @@ class CrudMakeCommand extends GeneratorCommand
 
     private function getTranslatableFields()
     {
-        return collect($this->option('translatable'));
+        return $this->getFormattedInputArray('translatable');
     }
 
     private function getSearchableFields()
     {
-        return collect($this->option('searchable'));
+        return $this->getFormattedInputArray('searchable');
     }
 
     private function getSortableFields()
     {
-        return collect($this->option('sortable'));
+        return $this->getFormattedInputArray('sortable');
     }
 
     private function getIncludeFields()
     {
-        return collect($this->option('include'));
+        return $this->getFormattedInputArray('include');
     }
 
     private function getFilterableFields()
     {
-        return collect($this->option('filterable'))->map(function ($field) {
+        return $this->getFormattedInputArray('filterable')->map(function ($field) {
             $name = $field;
             $segments = explode(':', $field);
 
@@ -249,7 +260,7 @@ class CrudMakeCommand extends GeneratorCommand
 
             $type = $this->getFields()->get($name);
 
-            if ($type === 'string') {
+            if (in_array($type, ['string', 'json'], true)) {
                 // Prefer partial as default SQL filter for text
                 $filter = 'partial';
             }
@@ -262,9 +273,9 @@ class CrudMakeCommand extends GeneratorCommand
         });
     }
 
-    private function getMediableFields()
+    private function getMediaFields()
     {
-        return collect($this->option('mediable'))->mapWithKeys(function ($field) {
+        return $this->getFormattedInputArray('media')->mapWithKeys(function ($field) {
             $segments = explode(':', $field);
 
             return [$segments[0] => $segments[1]];
@@ -273,24 +284,25 @@ class CrudMakeCommand extends GeneratorCommand
 
     private function getCasts()
     {
-        return collect($this->getFields())->filter(function ($type) {
-            return in_array($type, [
-                'integer',
-                'real',
-                'float',
-                'double',
-                'decimal',
-                'boolean',
-                'object',
-                'array',
-                'collection',
-                'date',
-                'datetime',
-                'timestamp',
-            ]);
+        return collect($this->getFields())->filter(function ($type, $name) {
+            return ! in_array($name, $this->getTranslatableFields()->toArray(), true)
+                && in_array($type, [
+                    'integer',
+                    'float',
+                    'double',
+                    'decimal',
+                    'boolean',
+                    'json',
+                    'date',
+                    'datetime',
+                    'timestamp',
+                ]);
         })->map(function ($type) {
             if ($type === 'decimal') {
                 return "$type:2";
+            }
+            if ($type === 'json') {
+                return "array";
             }
 
             return $type;
@@ -350,7 +362,7 @@ class CrudMakeCommand extends GeneratorCommand
         $this->call('make:migration:schema', [
             'name' => "create_{$table}_table",
             '--model' => false,
-            '--schema' => collect($this->option('schema'))->implode(', '),
+            '--schema' => $this->option('schema'),
         ]);
     }
 
@@ -426,14 +438,13 @@ EOF
     protected function getOptions()
     {
         return [
-            ['schema', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of database fields for migration'],
-            ['fields', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of fields (field:type)'],
-            ['mediable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of mediable fields (field:multiple)'],
-            ['translatable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of translatable fields'],
-            ['searchable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of searchable fields'],
-            ['sortable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of sortable fields'],
-            ['include', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of included related resources'],
-            ['filterable', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of custom filterable fields (field:internal)'],
+            ['schema', null, InputOption::VALUE_OPTIONAL, 'List of database fields for migration'],
+            ['media', null, InputOption::VALUE_OPTIONAL, 'List of media fields (field:multiple)'],
+            ['translatable', null, InputOption::VALUE_OPTIONAL, 'List of translatable fields'],
+            ['searchable', null, InputOption::VALUE_OPTIONAL, 'List of searchable fields'],
+            ['sortable', null, InputOption::VALUE_OPTIONAL, 'List of sortable fields'],
+            ['include', null, InputOption::VALUE_OPTIONAL, 'List of included related resources'],
+            ['filterable', null, InputOption::VALUE_OPTIONAL, 'List of custom filterable fields (field:internal)'],
             ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory file for the model'],
             ['seed', 's', InputOption::VALUE_NONE, 'Create a new seeder file for the model'],

@@ -21,7 +21,7 @@ class {{ class }} extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        {{ mediable }}
+        {{ media }}
     }
 
     public function registerMediaConversions(Media $media = null): void

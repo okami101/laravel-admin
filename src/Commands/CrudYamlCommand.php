@@ -97,13 +97,12 @@ class CrudYamlCommand extends Command
 
             $this->call('crud:make', [
                 'name' => $model,
-                '--fields' => $this->getFields($resource),
-                '--translatable' => $resource['translatable'] ?? [],
-                '--searchable' => $resource['searchable'] ?? [],
-                '--sortable' => $resource['sortable'] ?? [],
-                '--include' => $resource['include'] ?? [],
-                '--filterable' => $this->getFiltrableFields($resource)->toArray(),
-                '--mediable' => $this->getMediableFields($resource)->toArray(),
+                '--translatable' => collect($resource['translatable'] ?? [])->implode(', '),
+                '--searchable' => collect($resource['searchable'] ?? [])->implode(', '),
+                '--sortable' => collect($resource['sortable'] ?? [])->implode(', '),
+                '--include' => collect($resource['include'] ?? [])->implode(', '),
+                '--filterable' => $this->getFiltrableFields($resource)->implode(', '),
+                '--media' => $this->getMediaFields($resource)->implode(', '),
                 '--schema' => $this->getFieldSchemas($resource)->implode(', '),
                 '--migration' => $this->option('migration'),
                 '--factory' => $this->option('factory'),
@@ -113,49 +112,35 @@ class CrudYamlCommand extends Command
         }
     }
 
-    private function getDatabaseFields($resource)
+    private function getFieldSchemas($resource)
     {
         return collect($resource['fields'] ?? [])->filter(function ($field, $name) {
             return (! isset($field['db']) || $field['db'] !== false) && ! in_array($name, ['created_at', 'updated_at'], true);
-        });
-    }
+        })
+            ->map(function ($field, $name) use ($resource) {
+                $name = $field['db']['name'] ?? $name;
+                $type = $field['db']['type'] ?? 'string';
 
-    private function getFields($resource)
-    {
-        return $this->getDatabaseFields($resource)->map(function ($field, $name) {
-            $name = $field['db']['name'] ?? $name;
-            $type = $field['type'] ?? 'string';
-
-            return "$name:$type";
-        })->values();
-    }
-
-    private function getFieldSchemas($resource)
-    {
-        return $this->getDatabaseFields($resource)->map(function ($field, $name) use ($resource) {
-            $name = $field['db']['name'] ?? $name;
-            $type = $field['db']['type'] ?? 'string';
-
-            /**
-             * JSON required if translatable
-             */
-            if (in_array($name, $resource['translatable'] ?? [], true)) {
-                $type = 'json';
-            }
-
-            $schema = "$name:$type";
-
-            /**
-             * Specific database attribute
-             */
-            if (! empty($field['db']['options'])) {
-                foreach ($field['db']['options'] as $attribute) {
-                    $schema .= ":$attribute";
+                /**
+                 * JSON required if translatable
+                 */
+                if (in_array($name, $resource['translatable'] ?? [], true)) {
+                    $type = 'json';
                 }
-            }
 
-            return $schema;
-        })->values();
+                $schema = "$name:$type";
+
+                /**
+                 * Specific database attribute
+                 */
+                if (! empty($field['db']['options'])) {
+                    foreach ($field['db']['options'] as $attribute) {
+                        $schema .= ":$attribute";
+                    }
+                }
+
+                return $schema;
+            })->values();
     }
 
     private function getFiltrableFields($resource)
@@ -170,9 +155,9 @@ class CrudYamlCommand extends Command
         })->values();
     }
 
-    private function getMediableFields($resource)
+    private function getMediaFields($resource)
     {
-        return collect($resource['mediable'] ?? [])->map(function ($name) use ($resource) {
+        return collect($resource['media'] ?? [])->map(function ($name) use ($resource) {
             $multiple = $resource['fields'][$name]['form']['multiple'] ?? false;
 
             return "$name:$multiple";
