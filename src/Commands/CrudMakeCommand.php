@@ -289,7 +289,8 @@ class CrudMakeCommand extends GeneratorCommand
     private function getCasts()
     {
         return collect($this->getFields())->filter(function ($type, $name) {
-            return ! in_array($name, $this->getTranslatableFields()->toArray(), true)
+            return ! Str::endsWith($name, '_id')
+                && ! in_array($name, $this->getTranslatableFields()->toArray(), true)
                 && in_array($type, [
                     'integer',
                     'float',
@@ -362,11 +363,12 @@ class CrudMakeCommand extends GeneratorCommand
     protected function createMigration()
     {
         $table = Str::snake(Str::pluralStudly(class_basename($this->argument('name'))));
+        $value = $this->option('schema');
 
         $this->call('make:migration:schema', [
             'name' => "create_{$table}_table",
             '--model' => false,
-            '--schema' => $this->option('schema'),
+            '--schema' => is_array($value) ? implode(',', $value) : $value,
         ]);
     }
 
