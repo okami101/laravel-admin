@@ -5,19 +5,24 @@ namespace {{ namespace }};
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Translatable\HasTranslations;
 use Vtec\Crud\Traits\RequestMediaTrait;
-use Vtec\Crud\Traits\RequestTranslatableTrait;
 
 class {{ class }} extends Model implements HasMedia
 {
+    use HasTranslations;
     use RequestMediaTrait;
-    use RequestTranslatableTrait;
 
     protected $fillable = [{{ fillable }}];
 
     protected $casts = [{{ casts }}];
 
     public $translatable = [{{ translatable }}];
+
+    protected function getLocale(): string
+    {
+        return request()->get('locale') ?: app()->getLocale();
+    }
 
     public function registerMediaCollections(): void
     {

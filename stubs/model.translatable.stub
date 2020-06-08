@@ -3,15 +3,20 @@
 namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Model;
-use Vtec\Crud\Traits\RequestTranslatableTrait;
+use Spatie\Translatable\HasTranslations;
 
 class {{ class }} extends Model
 {
-    use RequestTranslatableTrait;
+    use HasTranslations;
 
     protected $fillable = [{{ fillable }}];
 
     protected $casts = [{{ casts }}];
 
     public $translatable = [{{ translatable }}];
+
+    protected function getLocale(): string
+    {
+        return request()->get('locale') ?: app()->getLocale();
+    }
 }
