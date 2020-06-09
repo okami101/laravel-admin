@@ -215,7 +215,7 @@ EOF
         /**
          * Keep only tinymce5 bridge which is the only used by Vtec Admin
          */
-        foreach ($this->files->allFiles(resource_path('views\vendor\elfinder')) as $file) {
+        foreach ($this->files->allFiles(resource_path('views/vendor/elfinder')) as $file) {
             if ($file->getFilename() !== 'tinymce5.blade.php') {
                 unlink($file);
             }
