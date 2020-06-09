@@ -286,25 +286,20 @@ EOF
 
         $this->warn(
             <<<EOF
-# Specific docker environment variables
-# Laravel host port
-NGINX_HTTP_PORT=8000
-# phpMyAdmin host port
-PMA_PORT=9000
-# MySQL root
-MYSQL_ROOT_PASSWORD=root
+APP_TIMEZONE=UTC
 
-# Specific app environment variables
-APP_TIMEZONE=Europe/Paris
 DB_HOST=mysql
 DB_DATABASE=laravel
 DB_USERNAME=laravel
 DB_PASSWORD=laravel
+
 REDIS_HOST=redis
 CACHE_DRIVER=redis
 SESSION_DRIVER=redis
-# Use redis queue on prod
-# QUEUE_CONNECTION=redis
+
+NGINX_HTTP_PORT=8000
+PMA_PORT=9000
+MYSQL_ROOT_PASSWORD=root
 EOF
         );
     }
