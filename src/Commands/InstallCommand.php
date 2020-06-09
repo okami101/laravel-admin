@@ -133,7 +133,7 @@ class InstallCommand extends Command
         /**
          * Vue CLI Plugin install from preset
          */
-        $this->call('admin:ui');
+        $this->call('vtec:ui');
     }
 
     /**
