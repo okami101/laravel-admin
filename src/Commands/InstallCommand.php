@@ -50,7 +50,6 @@ class InstallCommand extends Command
         /**
          * Composer dependencies
          */
-        $dependencies = ['laravel/ui'];
         $devDependencies = ['laracasts/generators'];
 
         if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (required if you choose sanctum provider) ?', true)) {
@@ -77,7 +76,7 @@ class InstallCommand extends Command
         /**
          * Laravel UI auth controllers
          */
-        $this->call('\Illuminate\Console\Command\ControllersCommand');
+        $this->call('ui:controllers');
 
         /**
          * Specific per-package preconfiguration
