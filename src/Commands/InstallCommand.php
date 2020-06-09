@@ -88,10 +88,6 @@ class InstallCommand extends Command
             $this->configureLaravelElfinder();
         }
 
-        if ($installLaravelClockwork) {
-            $this->configureLaravelClockwork();
-        }
-
         if ($installLaravelIdeHelper) {
             $this->configureLaravelIdeHelper();
         }
