@@ -48,7 +48,7 @@ class UICommand extends Command
             return;
         }
 
-        $dir = $this->ask('Folder for Vue CLI Admin project ?', 'admin-vuetify');
+        $dir = $this->ask('Sub folder for Vue CLI Admin project ?', 'admin');
         $this->install($dir);
     }
 
