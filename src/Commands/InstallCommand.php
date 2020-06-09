@@ -48,27 +48,6 @@ class InstallCommand extends Command
     public function handle()
     {
         /**
-         * Auto included package publish
-         */
-        $this->call('vendor:publish', [
-            '--provider' => MediaLibraryServiceProvider::class,
-            '--tag' => ['config', 'migrations'],
-        ]);
-
-        $this->call('vendor:publish', [
-            '--provider' => CrudServiceProvider::class,
-            '--tag' => 'config',
-            '--force' => true,
-        ]);
-
-        /**
-         * Default Laravel configuration with auth and user routes and api controllers
-         */
-        $this->changeAuthenticationRedirect();
-        $this->addUserController();
-        $this->configureRoutes();
-
-        /**
          * Composer dependencies
          */
         $dependencies = ['laravel/ui'];
@@ -130,6 +109,30 @@ class InstallCommand extends Command
             $this->addDockerfiles();
         }
 
+        /**
+         * Auto included package publish
+         */
+        $this->call('vendor:publish', [
+            '--provider' => MediaLibraryServiceProvider::class,
+            '--tag' => ['config', 'migrations'],
+        ]);
+
+        $this->call('vendor:publish', [
+            '--provider' => CrudServiceProvider::class,
+            '--tag' => 'config',
+            '--force' => true,
+        ]);
+
+        /**
+         * Default Laravel configuration with auth and user routes and api controllers
+         */
+        $this->changeAuthenticationRedirect();
+        $this->addUserController();
+        $this->configureRoutes();
+
+        /**
+         * Vue CLI Plugin install from preset
+         */
         $this->call('admin:ui');
     }
 
