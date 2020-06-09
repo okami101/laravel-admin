@@ -50,8 +50,6 @@ class InstallCommand extends Command
         /**
          * Composer dependencies
          */
-        $devDependencies = ['laracasts/generators'];
-
         if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (required if you choose sanctum provider) ?', true)) {
             $dependencies[] = 'laravel/sanctum';
         }
@@ -70,8 +68,9 @@ class InstallCommand extends Command
 
         $this->installDependencies($dependencies);
         $this->installDependencies($devDependencies, true);
-        $this->updateDependencies();
 
+        $this->line('Installing dependencies');
+        $this->executeCommand(['composer', 'update']);
 
         /**
          * Laravel UI auth controllers
@@ -184,10 +183,6 @@ class InstallCommand extends Command
     private function configureLaravelSanctum()
     {
         $this->line('Configure Laravel Sanctum');
-        $this->call('vendor:publish', [
-            '--provider' => 'Laravel\Sanctum\SanctumServiceProvider',
-            '--tag' => 'sanctum-config',
-        ]);
 
         $kernel = app_path('Http/Kernel.php');
 
@@ -215,9 +210,7 @@ EOF
     private function configureLaravelElfinder()
     {
         $this->line('Configure Laravel Elfinder');
-        $this->call('vendor:publish', [
-            '--provider' => 'Barryvdh\Elfinder\ElfinderServiceProvider',
-        ]);
+        $this->executeCommand(['php', 'artisan', 'vendor:publish', '--provider', 'Barryvdh\Elfinder\ElfinderServiceProvider']);
 
         /**
          * Keep only tinymce5 bridge which is the only used by Vtec Admin
@@ -236,27 +229,12 @@ EOF
         /**
          * Publish Elfinder assets
          */
-        $this->call('elfinder:publish');
-    }
-
-    private function configureLaravelClockwork()
-    {
-        $this->line('Configure Laravel Clockwork');
-        $this->call('vendor:publish', [
-            '--provider' => 'Clockwork\Support\Laravel\ClockworkServiceProvider',
-        ]);
+        $this->executeCommand(['php', 'artisan', 'elfinder:publish']);
     }
 
     private function configureLaravelIdeHelper()
     {
         $this->line('Configure Laravel IDE Helper');
-        $this->call('vendor:publish', [
-            '--provider' => 'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
-            '--tag' => 'config',
-        ]);
-
-        $this->call('ide-helper:generate');
-        $this->call('ide-helper:meta');
 
         $this->warn(
             'Add this code inside composer.json for automatic generation :' . <<<EOF
@@ -349,12 +327,8 @@ EOF
         $process->run();
     }
 
-    private function updateDependencies()
+    private function executeCommand($command)
     {
-        $this->line('Installing dependencies');
-
-        $command = ['composer', 'update'];
-
         $process = new Process($command, null, null, null, null);
         $process->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
