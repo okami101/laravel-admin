@@ -73,10 +73,11 @@ class InstallCommand extends Command
         $this->installDependencies($devDependencies, true);
         $this->updateDependencies();
 
+
         /**
          * Laravel UI auth controllers
          */
-        $this->call('ui:controllers');
+        $this->call('Illuminate\Console\Command\ControllersCommand');
 
         /**
          * Specific per-package preconfiguration
