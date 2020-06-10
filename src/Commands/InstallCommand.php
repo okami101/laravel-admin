@@ -288,6 +288,8 @@ EOF
             <<<EOF
 APP_TIMEZONE=UTC
 
+SANCTUM_STATEFUL_DOMAINS=localhost:8080
+
 DB_HOST=mysql
 DB_DATABASE=laravel
 DB_USERNAME=laravel
