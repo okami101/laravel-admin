@@ -57,7 +57,11 @@ class CrudServiceProvider extends ServiceProvider
         }, __('crud::validation.mismatch_password'));
 
         Validator::extend('strong_password', function ($attribute, $value, $parameters, $validator) {
-            return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', (string) $value);
+            if (! config('app.debug')) {
+                return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', (string) $value);
+            }
+
+            return true;
         }, __('crud::validation.strong_password'));
 
         QueryBuilder::macro('exportOrPaginate', function () {
