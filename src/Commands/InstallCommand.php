@@ -286,6 +286,7 @@ EOF
 
         $this->warn(
             <<<EOF
+APP_URL=http://localhost:8000
 APP_TIMEZONE=UTC
 
 SANCTUM_STATEFUL_DOMAINS=localhost:8080
