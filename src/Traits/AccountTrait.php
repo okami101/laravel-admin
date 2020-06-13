@@ -22,17 +22,14 @@ trait AccountTrait
      */
     public function updateLoggedUser(Request $request)
     {
-        $this->validate($request, [
+        $validated = $this->validate($request, [
             'name' => 'required|max:191',
             'email' => 'required|email|unique:users,email,'.auth()->id(),
         ]);
 
         /** @var Model $user */
         $user = auth()->user();
-
-        $user->fill($request->input());
-
-        $user->save();
+        $user->update($validated);
 
         return $user;
     }
