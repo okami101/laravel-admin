@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.2.8
+## v0.2.9
 
 * Add URL env
 * Fix user from API stub and force 401 auth
