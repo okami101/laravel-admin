@@ -322,7 +322,7 @@ EOF
             $command[] = '--dev';
         }
 
-        $process = new Process($command);
+        $process = new Process($command, null, null, null, null);
         $process->run();
     }
 

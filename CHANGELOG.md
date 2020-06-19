@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.10
+
+* Remove timeout on install process
+
 ## v0.2.9
 
 * Add URL env
