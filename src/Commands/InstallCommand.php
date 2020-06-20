@@ -16,7 +16,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $name = 'vtec:install';
+    protected $name = 'crud:install';
 
     /**
      * The console command description.

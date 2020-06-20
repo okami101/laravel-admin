@@ -23,7 +23,7 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 
 ```bash
 composer require vtec/laravel-crud
-php artisan vtec:install
+php artisan crud:install
 ```
 
 See [dedicated guide](https://vtec.okami101.io/guide/laravel.html) for further detail.

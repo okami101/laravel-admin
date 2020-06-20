@@ -15,7 +15,7 @@ class UserCommand extends Command
      *
      * @var string
      */
-    protected $name = 'vtec:user';
+    protected $name = 'crud:user';
 
     /**
      * The console command description.

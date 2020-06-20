@@ -13,7 +13,7 @@ class UICommand extends Command
      *
      * @var string
      */
-    protected $name = 'vtec:ui';
+    protected $name = 'crud:ui';
 
     /**
      * The console command description.
