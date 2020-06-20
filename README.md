@@ -28,9 +28,9 @@ php artisan vtec:install
 
 See [dedicated guide](https://vtec.okami101.io/guide/laravel.html) for further detail.
 
-## Full documentation
+## Documentation
 
-Full documentation can be found on the [Vtec docs website](https://vtec.okami101.io).
+Documentation for Vtec Admin can be found on the [Vtec website](https://vtec.okami101.io).
 
 ## License
 
