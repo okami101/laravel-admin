@@ -62,6 +62,9 @@ class InstallCommand extends Command
         if ($installLaravelClockwork = $this->confirm('Install itsgoingd/clockwork to provide debugging and profiling ?', true)) {
             $dependencies[] = 'itsgoingd/clockwork';
         }
+        if ($installLaravelIdeHelper = $this->confirm('Install beyondcode/laravel-dump-server to provide dump server for API ?', true)) {
+            $devDependencies[] = 'beyondcode/laravel-dump-server';
+        }
         if ($installLaravelIdeHelper = $this->confirm('Install barryvdh/laravel-ide-helper to provide full autocompletion ?', true)) {
             $devDependencies[] = 'barryvdh/laravel-ide-helper';
         }

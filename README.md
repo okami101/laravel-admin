@@ -8,7 +8,7 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 ## Features
 
 * On-asking installer for quick start by optional packages selection, including associated Vue CLI admin project !
-* Many optional dev packages proposed by the installer as [IDE Helper](https://github.com/barryvdh/laravel-ide-helper), PHP CS Fixer with Laravel preset, [Clockwork](https://github.com/itsgoingd/clockwork), [Laracasts Generators](https://github.com/laracasts/Laravel-5-Generators-Extended).
+* Many optional dev packages proposed by the installer as [IDE Helper](https://github.com/barryvdh/laravel-ide-helper), PHP CS Fixer with Laravel preset, [Clockwork](https://github.com/itsgoingd/clockwork), [Dump Server](https://github.com/beyondcode/laravel-dump-server), [Laracasts Generators](https://github.com/laracasts/Laravel-5-Generators-Extended).
 * [Laravel Sanctum](https://github.com/laravel/sanctum) for admin SPA auth.
 * [Laravel elFinder](https://github.com/barryvdh/laravel-elfinder) for direct disk file management with Wysiwyg bridges.
 * Removable image upload controller compatible with TinyMCE 5.

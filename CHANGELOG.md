@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.14
+
+* Add dump server for easiest API debugging
+
 ## v0.2.13
 
 * Move vtec commands to crud namespace
