@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.15
+
+* Move locale on header
+
 ## v0.2.14
 
 * Add dump server for easiest API debugging
