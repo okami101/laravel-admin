@@ -3,10 +3,9 @@
 namespace Vtec\Crud\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\FileAdder;
-use Spatie\MediaLibrary\MediaCollections\MediaCollection;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\MediaCollection\MediaCollection;
+use Spatie\MediaLibrary\Models\Media;
 
 /**
  * Trait RequestMediaTrait
@@ -15,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 trait RequestMediaTrait
 {
-    use InteractsWithMedia;
+    use HasMediaTrait;
 
     /**
      * Auto attach media via request

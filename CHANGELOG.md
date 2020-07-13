@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.16
+
+* Allow PHP 7.2
+
 ## v0.2.15
 
 * Move locale on header
