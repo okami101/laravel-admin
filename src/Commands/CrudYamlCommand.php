@@ -151,6 +151,7 @@ class CrudYamlCommand extends Command
             if ($internal) {
                 return "$name:$internal";
             }
+
             return $name;
         })->values();
     }

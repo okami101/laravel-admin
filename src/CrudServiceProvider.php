@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\QueryBuilder\QueryBuilder;
-use Vtec\Crud\Commands\UICommand;
+use Vtec\Crud\Commands\CrudMakeCommand;
 use Vtec\Crud\Commands\CrudYamlCommand;
 use Vtec\Crud\Commands\InstallCommand;
-use Vtec\Crud\Commands\CrudMakeCommand;
+use Vtec\Crud\Commands\UICommand;
 use Vtec\Crud\Commands\UserCommand;
 
 class CrudServiceProvider extends ServiceProvider
