@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.18
+
+* Fix only PHP 7.4 line code on installer
+
 ## v0.2.17
 
 * Fix media in request trait and base resource

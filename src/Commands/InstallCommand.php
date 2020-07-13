@@ -319,7 +319,7 @@ EOF
     {
         $this->line($dev ? 'Add dev dependencies' : 'Add dependencies');
 
-        $command = ['composer', 'require', ...$dependencies, '--no-update'];
+        $command = array_merge(['composer', 'require'], $dependencies, ['--no-update']);
 
         if ($dev) {
             $command[] = '--dev';
