@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.17
+
+* Fix media in request trait and base resource
+
 ## v0.2.16
 
 * Allow PHP 7.2

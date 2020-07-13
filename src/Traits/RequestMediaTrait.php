@@ -3,6 +3,7 @@
 namespace Vtec\Crud\Traits;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\FileAdder\FileAdder;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\MediaCollection\MediaCollection;
 use Spatie\MediaLibrary\Models\Media;
