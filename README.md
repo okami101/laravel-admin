@@ -3,9 +3,16 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 [![License](https://img.shields.io/packagist/l/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
 
-Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated admin panel builder based on Vue CLI.
+Admin Crud resource builder for Laravel 7, from backend API to UI with help of [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated Vue CLI admin panel builder based on Vuetify.
+
+> See [full documentation](https://vtec.okami101.io)  
+> Check [online demo](https://vtec-bookstore-demo.okami101.io) -> go to admin and use pre-filled login (read only)  
+
+[![demo](https://vtec.okami101.io/assets/screenshot.png)](https://vtec-bookstore-demo.okami101.io)
 
 ## Features
+
+### From this package
 
 * On-asking installer for quick start by optional packages selection, including associated Vue CLI admin project !
 * Many optional dev packages proposed by the installer as [IDE Helper](https://github.com/barryvdh/laravel-ide-helper), PHP CS Fixer with Laravel preset, [Clockwork](https://github.com/itsgoingd/clockwork), [Dump Server](https://github.com/beyondcode/laravel-dump-server), [Laracasts Generators](https://github.com/laracasts/Laravel-5-Generators-Extended).
@@ -17,16 +24,20 @@ Crud API resource builder for Laravel 7. Fully compatible with [Vtec Admin](http
 * Simple account controller for profile editing and password change.
 * User impersonation with dedicated middleware.
 * Quick resource api generator commands including direct YAML descriptor file !
-* Pre configured docker files included with ready to use MySQL, phpMyAdmin, Nginx and Redis !
+* Pre-configured docker files included with ready to use MySQL, phpMyAdmin, Nginx and Redis !
 
-## Installation
+### From Vtec Admin
+
+See [dedicated readme](https://github.com/okami101/vtec-admin#features) of Vtec Admin repo for full listing.
+
+## Install
 
 ```bash
 composer require vtec/laravel-crud
 php artisan crud:install
 ```
 
-See [dedicated guide](https://vtec.okami101.io/guide/laravel.html) for further detail.
+See [dedicated guide](https://vtec.okami101.io/guide/laravel.html) for full showcase.
 
 ## Documentation
 

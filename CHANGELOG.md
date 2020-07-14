@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.19
+
+* Rework on Readme
+
 ## v0.2.18
 
 * Fix only PHP 7.4 line code on installer

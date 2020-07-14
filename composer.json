@@ -1,20 +1,24 @@
 {
     "name": "vtec/laravel-crud",
-    "description": "API crud generator for Laravel.",
+    "description": "Laravel CRUD generator based on Vtec Admin, a SPA admin panel based on Vuetify.",
     "keywords": [
-        "vtec",
+        "laravel",
         "crud",
+        "api",
         "admin",
-        "laravel"
+        "vue",
+        "vuetify",
+        "vue-admin",
+        "vuetify-admin",
+        "vtec",
+        "vtec-admin"
     ],
-    "homepage": "https://github.com/okami101/vtec-laravel-crud",
+    "homepage": "https://vtec.okami101.io",
     "license": "MIT",
     "authors": [
         {
             "name": "Adrien Beaudouin",
-            "email": "adrien.beaudouin@outlook.com",
-            "homepage": "https://vtec.okami101.io",
-            "role": "Developer"
+            "email": "adrien.beaudouin@outlook.com"
         }
     ],
     "require": {
