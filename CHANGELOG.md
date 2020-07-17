@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.22
+
+* Force no-git vue create
+
 ## v0.2.21
 
 * Import routes facades

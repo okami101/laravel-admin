@@ -66,7 +66,7 @@ class UICommand extends Command
 
     private function install($dir)
     {
-        $process = new Process(['vue', 'create', $dir, '--preset', __DIR__ . '/../../preset.json'], null, null, null, null);
+        $process = new Process(['vue', 'create', $dir, '--no-git', '--preset', __DIR__ . '/../../preset.json'], null, null, null, null);
         $process->run(function ($type, $buffer) {
             if (Process::ERR === $type) {
                 $this->comment($buffer);
