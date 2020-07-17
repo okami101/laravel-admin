@@ -1,8 +1,12 @@
 # Changelog
 
+## v0.2.21
+
+* Import routes facades
+
 ## v0.2.20
 
-* remove PHP 7.4 property stub
+* Remove PHP 7.4 property stub
 
 ## v0.2.19
 
