@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.20
+
+* remove PHP 7.4 property stub
+
 ## v0.2.19
 
 * Rework on Readme
