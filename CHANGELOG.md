@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.24
+
+* Update Laravel Query Builder to v3
+
 ## v0.2.22
 
 * Force no-git vue create

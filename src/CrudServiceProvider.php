@@ -2,6 +2,7 @@
 
 namespace Vtec\Crud;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
@@ -62,6 +63,16 @@ class CrudServiceProvider extends ServiceProvider
 
             return true;
         }, __('crud::validation.strong_password'));
+
+        Builder::macro('exportOrPaginate', function () {
+            if (request()->get('perPage')) {
+                return $this
+                    ->paginate(request()->get('perPage'))
+                    ->appends(request()->query());
+            }
+
+            return $this->get();
+        });
     }
 
     /**
