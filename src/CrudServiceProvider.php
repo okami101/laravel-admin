@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Spatie\QueryBuilder\QueryBuilder;
 use Vtec\Crud\Commands\CrudMakeCommand;
 use Vtec\Crud\Commands\CrudYamlCommand;
 use Vtec\Crud\Commands\InstallCommand;
@@ -63,16 +62,6 @@ class CrudServiceProvider extends ServiceProvider
 
             return true;
         }, __('crud::validation.strong_password'));
-
-        QueryBuilder::macro('exportOrPaginate', function () {
-            if (request()->get('perPage')) {
-                return $this
-                    ->paginate(request()->get('perPage'))
-                    ->appends(request()->query());
-            }
-
-            return $this->get();
-        });
     }
 
     /**
