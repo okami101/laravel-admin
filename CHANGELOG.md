@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.25
+
+* Refactor impersonation
+
 ## v0.2.24
 
 * Update Laravel Query Builder to v3

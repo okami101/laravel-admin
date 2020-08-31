@@ -16,20 +16,12 @@ class Impersonate
      */
     public function handle($request, Closure $next)
     {
-        if (! $request->hasSession()) {
-            return $next($request);
-        }
-
-        if ($id = $request->session()->get('impersonate')) {
+        if ($request->hasSession() && $id = $request->session()->get('impersonate')) {
             auth()->onceUsingId($id);
 
             return $next($request);
         }
 
-        return (new Pipeline(app()))->send($request)->through([
-            '\App\Http\Middleware\Authenticate:sanctum',
-        ])->then(function ($request) use ($next) {
-            return $next($request);
-        });
+        return $next($request);
     }
 }
