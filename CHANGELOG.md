@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.26
+
+* Inject impersonation
+
 ## v0.2.25
 
 * Refactor impersonation
