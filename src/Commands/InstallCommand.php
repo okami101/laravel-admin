@@ -198,6 +198,7 @@ class InstallCommand extends Command
                         0,
                         <<<EOF
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Vtec\Crud\Http\Middleware\Impersonate::class,
 
 EOF
                     );
