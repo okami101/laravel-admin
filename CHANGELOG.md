@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.27
+
+* Fix full locale case
+
 ## v0.2.26
 
 * Inject impersonation

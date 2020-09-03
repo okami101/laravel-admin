@@ -4,12 +4,13 @@ namespace Vtec\Crud\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Locale
 {
     public function handle(Request $request, Closure $next)
     {
-        app()->setLocale($request->getPreferredLanguage());
+        app()->setLocale(Str::substr($request->getPreferredLanguage(), 0, 2));
 
         return $next($request);
     }
