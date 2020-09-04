@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.28
+
+* Fix AccountController stub
+
 ## v0.2.27
 
 * Fix full locale case
