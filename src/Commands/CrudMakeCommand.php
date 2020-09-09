@@ -14,7 +14,7 @@ class CrudMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'admin:make';
+    protected $name = 'crud:make';
 
     /**
      * The console command description.

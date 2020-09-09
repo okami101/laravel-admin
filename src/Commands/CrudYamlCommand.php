@@ -16,7 +16,7 @@ class CrudYamlCommand extends Command
      *
      * @var string
      */
-    protected $name = 'admin:yaml';
+    protected $name = 'crud:yaml';
 
     /**
      * The console command description.
@@ -95,7 +95,7 @@ class CrudYamlCommand extends Command
                 continue;
             }
 
-            $this->call('admin:make', [
+            $this->call('crud:make', [
                 'name' => $model,
                 '--translatable' => $resource['translatable'] ?? [],
                 '--searchable' => $resource['searchable'] ?? [],
