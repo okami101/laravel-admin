@@ -3,7 +3,6 @@
 namespace Okami101\LaravelVuetifyAdmin\Http\Middleware;
 
 use Closure;
-use Illuminate\Routing\Pipeline;
 
 class Impersonate
 {

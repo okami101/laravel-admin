@@ -5,9 +5,9 @@ namespace Okami101\LaravelVuetifyAdmin\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
+use Okami101\LaravelVuetifyAdmin\AdminServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\Process\Process;
-use Okami101\LaravelVuetifyAdmin\AdminServiceProvider;
 
 class InstallCommand extends Command
 {
