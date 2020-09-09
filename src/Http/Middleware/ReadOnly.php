@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Http\Middleware;
+namespace Okami101\LaravelVuetifyAdmin\Http\Middleware;
 
 use Closure;
 
@@ -25,7 +25,7 @@ class ReadOnly
     {
         if ($this->isReadOnly($request)) {
             if ($request->expectsJson()) {
-                return response()->json(['message' => __('crud::admin.read_only')], 405);
+                return response()->json(['message' => __('admin::admin.read_only')], 405);
             }
 
             return redirect(config('admin.url'));

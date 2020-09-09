@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Commands;
+namespace Okami101\LaravelVuetifyAdmin\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -13,7 +13,7 @@ class UICommand extends Command
      *
      * @var string
      */
-    protected $name = 'crud:ui';
+    protected $name = 'admin:ui';
 
     /**
      * The console command description.

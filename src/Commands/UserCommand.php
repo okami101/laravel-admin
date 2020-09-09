@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Commands;
+namespace Okami101\LaravelVuetifyAdmin\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +15,7 @@ class UserCommand extends Command
      *
      * @var string
      */
-    protected $name = 'crud:user';
+    protected $name = 'admin:user';
 
     /**
      * The console command description.

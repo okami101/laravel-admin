@@ -58,7 +58,7 @@
 
 ## v0.2.13
 
-* Move vtec commands to crud namespace
+* Move commands to crud namespace
 
 ## v0.2.10
 

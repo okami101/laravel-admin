@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Tests;
+namespace Okami101\LaravelVuetifyAdmin\Tests;
 
 use PHPUnit\Framework\TestCase;
 

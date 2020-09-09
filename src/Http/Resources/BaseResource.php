@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Http\Resources;
+namespace Okami101\LaravelVuetifyAdmin\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;

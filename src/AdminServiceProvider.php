@@ -1,19 +1,19 @@
 <?php
 
-namespace Vtec\Crud;
+namespace Okami101\LaravelVuetifyAdmin;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Vtec\Crud\Commands\CrudMakeCommand;
-use Vtec\Crud\Commands\CrudYamlCommand;
-use Vtec\Crud\Commands\InstallCommand;
-use Vtec\Crud\Commands\UICommand;
-use Vtec\Crud\Commands\UserCommand;
+use Okami101\LaravelVuetifyAdmin\Commands\CrudMakeCommand;
+use Okami101\LaravelVuetifyAdmin\Commands\CrudYamlCommand;
+use Okami101\LaravelVuetifyAdmin\Commands\InstallCommand;
+use Okami101\LaravelVuetifyAdmin\Commands\UICommand;
+use Okami101\LaravelVuetifyAdmin\Commands\UserCommand;
 
-class CrudServiceProvider extends ServiceProvider
+class AdminServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -54,7 +54,7 @@ class CrudServiceProvider extends ServiceProvider
 
         Validator::extend('current_password', function ($attribute, $value, $parameters, $validator) {
             return Hash::check($value, auth()->user()->password);
-        }, __('crud::validation.mismatch_password'));
+        }, __('admin::validation.mismatch_password'));
 
         Validator::extend('strong_password', function ($attribute, $value, $parameters, $validator) {
             if (! config('app.debug')) {
@@ -62,7 +62,7 @@ class CrudServiceProvider extends ServiceProvider
             }
 
             return true;
-        }, __('crud::validation.strong_password'));
+        }, __('admin::validation.strong_password'));
 
         Builder::macro('exportOrPaginate', function () {
             if (request()->get('perPage')) {

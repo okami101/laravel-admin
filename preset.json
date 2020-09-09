@@ -30,7 +30,7 @@
             "usePolyfill": true,
             "locale": "en"
         },
-        "vue-cli-plugin-vtec-admin": {
+        "vue-cli-plugin-vuetify-admin": {
             "dataProvider": "laravel",
             "authProvider": "sanctum",
             "apiURL": "http://localhost:8000",

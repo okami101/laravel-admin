@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Filters;
+namespace Okami101\LaravelVuetifyAdmin\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\QueryBuilder\Filters\Filter;

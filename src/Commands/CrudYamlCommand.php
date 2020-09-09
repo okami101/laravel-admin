@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Commands;
+namespace Okami101\LaravelVuetifyAdmin\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -16,7 +16,7 @@ class CrudYamlCommand extends Command
      *
      * @var string
      */
-    protected $name = 'crud:yaml';
+    protected $name = 'admin:yaml';
 
     /**
      * The console command description.
@@ -95,7 +95,7 @@ class CrudYamlCommand extends Command
                 continue;
             }
 
-            $this->call('crud:make', [
+            $this->call('admin:make', [
                 'name' => $model,
                 '--translatable' => $resource['translatable'] ?? [],
                 '--searchable' => $resource['searchable'] ?? [],

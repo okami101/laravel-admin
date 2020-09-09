@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud;
+namespace Okami101\LaravelVuetifyAdmin;
 
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,7 @@ class AdminRouteMethods
     public function upload()
     {
         return function () {
-            $this->post('upload', '\Vtec\Crud\Http\Controllers\UploadController@index');
+            $this->post('upload', '\Okami101\LaravelVuetifyAdmin\Http\Controllers\UploadController@index');
         };
     }
 }

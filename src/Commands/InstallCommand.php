@@ -1,13 +1,13 @@
 <?php
 
-namespace Vtec\Crud\Commands;
+namespace Okami101\LaravelVuetifyAdmin\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\Process\Process;
-use Vtec\Crud\CrudServiceProvider;
+use Okami101\LaravelVuetifyAdmin\AdminServiceProvider;
 
 class InstallCommand extends Command
 {
@@ -16,7 +16,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $name = 'crud:install';
+    protected $name = 'admin:install';
 
     /**
      * The console command description.
@@ -119,7 +119,7 @@ class InstallCommand extends Command
         ]);
 
         $this->call('vendor:publish', [
-            '--provider' => CrudServiceProvider::class,
+            '--provider' => AdminServiceProvider::class,
             '--tag' => 'config',
             '--force' => true,
         ]);
@@ -138,7 +138,7 @@ class InstallCommand extends Command
     }
 
     /**
-     * Replace default laravel redirect to Vtec admin url
+     * Replace default laravel redirect to admin url
      *
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
@@ -198,7 +198,7 @@ class InstallCommand extends Command
                         0,
                         <<<EOF
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Vtec\Crud\Http\Middleware\Impersonate::class,
+            \Okami101\LaravelVuetifyAdmin\Http\Middleware\Impersonate::class,
 
 EOF
                     );
@@ -216,7 +216,7 @@ EOF
         $this->executeCommand(['php', 'artisan', 'vendor:publish', '--provider', 'Barryvdh\Elfinder\ElfinderServiceProvider']);
 
         /**
-         * Keep only tinymce5 bridge which is the only used by Vtec Admin
+         * Keep only tinymce5 bridge which is the only used by Vuetify Admin
          */
         foreach ($this->files->allFiles(resource_path('views/vendor/elfinder')) as $file) {
             if ($file->getFilename() !== 'tinymce5.blade.php') {
@@ -263,7 +263,7 @@ EOF
         $this->line('Configure PHP CS Fixer');
 
         $this->call('vendor:publish', [
-            '--provider' => CrudServiceProvider::class,
+            '--provider' => AdminServiceProvider::class,
             '--tag' => 'phpcs',
         ]);
 
@@ -285,7 +285,7 @@ EOF
     {
         $this->line('Add docker files');
         $this->call('vendor:publish', [
-            '--provider' => CrudServiceProvider::class,
+            '--provider' => AdminServiceProvider::class,
             '--tag' => 'docker',
         ]);
 

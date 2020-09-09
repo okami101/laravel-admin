@@ -1,14 +1,14 @@
-# Vtec Laravel Crud
+# Laravel Vuetify Admin
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
-[![License](https://img.shields.io/packagist/l/vtec/laravel-crud.svg?style=flat-square)](https://packagist.org/packages/vtec/laravel-crud)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/okami101/laravel-vuetify-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-vuetify-admin)
+[![License](https://img.shields.io/packagist/l/okami101/laravel-vuetify-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-vuetify-admin)
 
-Admin Crud resource builder for Laravel 7, from backend API to UI with help of [Vtec Admin](https://github.com/okami101/vtec-admin), a 100% SPA separated Vue CLI admin panel builder based on Vuetify.
+Admin Crud resource builder for Laravel 7, from backend API to UI with help of [Vuetify Admin](https://github.com/okami101/vuetify-admin), a 100% SPA separated Vue CLI admin panel builder based on Vuetify.
 
-> See [full documentation](https://vtec.okami101.io)  
-> Check [online demo](https://vtec-bookstore-demo.okami101.io) -> go to admin and use pre-filled login (read only)  
+> See [full documentation](https://www.okami101.io/vuetify-admin)  
+> Check [online demo](https://va-demo.okami101.io) -> go to admin and use pre-filled login (read only)  
 
-[![demo](https://vtec.okami101.io/assets/screenshot.png)](https://vtec-bookstore-demo.okami101.io)
+[![demo](https://www.okami101.io/vuetify-admin/assets/screenshot.png)](https://va-demo.okami101.io)
 
 ## Features
 
@@ -26,22 +26,22 @@ Admin Crud resource builder for Laravel 7, from backend API to UI with help of [
 * Quick resource api generator commands including direct YAML descriptor file !
 * Pre-configured docker files included with ready to use MySQL, phpMyAdmin, Nginx and Redis !
 
-### From Vtec Admin
+### From Vuetify Admin
 
-See [dedicated readme](https://github.com/okami101/vtec-admin#features) of Vtec Admin repo for full listing.
+See [dedicated readme](https://github.com/okami101/vuetify-admin#features) of Vuetify Admin repo for full listing.
 
 ## Install
 
 ```bash
-composer require vtec/laravel-crud
-php artisan crud:install
+composer require okami101/laravel-vuetify-admin
+php artisan admin:install
 ```
 
-See [dedicated guide](https://vtec.okami101.io/guide/laravel.html) for full showcase.
+See [dedicated guide](https://www.okami101.io/vuetify-admin/guide/laravel.html) for full showcase.
 
 ## Documentation
 
-Documentation for Vtec Admin can be found on the [Vtec website](https://vtec.okami101.io).
+Documentation for Vuetify Admin can be found on the [Okami101 website](https://www.okami101.io/vuetify-admin).
 
 ## License
 

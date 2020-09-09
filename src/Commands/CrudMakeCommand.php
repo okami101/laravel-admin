@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Commands;
+namespace Okami101\LaravelVuetifyAdmin\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
@@ -14,7 +14,7 @@ class CrudMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'crud:make';
+    protected $name = 'admin:make';
 
     /**
      * The console command description.

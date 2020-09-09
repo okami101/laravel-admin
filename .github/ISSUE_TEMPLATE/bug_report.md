@@ -8,7 +8,7 @@ assignees: ''
 
 **Disclaimer**
 Be sure that the issue is related to this composer package and the last Vue CLI 4.x version is used.
-For any Vtec Admin related issue, please create one [on the main repo](https://github.com/okami101/vtec-admin/issues/new?template=bug_report.md).
+For any Vuetify Admin related issue, please create one [on the main repo](https://github.com/okami101/vuetify-admin/issues/new?template=bug_report.md).
 
 **Describe the bug**
 A clear and concise description of what the bug is.
@@ -16,7 +16,7 @@ A clear and concise description of what the bug is.
 **To Reproduce**
 Steps to reproduce the behavior :
 
-1. Launch command crud:install
+1. Launch command admin:install
 2. See error at this step : installing dependencies
 
 **Screenshots**

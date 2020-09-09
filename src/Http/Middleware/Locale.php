@@ -1,6 +1,6 @@
 <?php
 
-namespace Vtec\Crud\Http\Middleware;
+namespace Okami101\LaravelVuetifyAdmin\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

@@ -1,6 +1,6 @@
 {
-    "name": "vtec/laravel-crud",
-    "description": "Laravel CRUD generator based on Vtec Admin, a SPA admin panel based on Vuetify.",
+    "name": "okami101/laravel-vuetify-admin",
+    "description": "Laravel admin panel generator using Vuetify Admin, a separate SPA admin framework running on top of REST APIs and built on Vuetify.",
     "keywords": [
         "laravel",
         "crud",
@@ -9,11 +9,9 @@
         "vue",
         "vuetify",
         "vue-admin",
-        "vuetify-admin",
-        "vtec",
-        "vtec-admin"
+        "vuetify-admin"
     ],
-    "homepage": "https://vtec.okami101.io",
+    "homepage": "https://www.okami101.io/vuetify-admin",
     "license": "MIT",
     "authors": [
         {
@@ -38,12 +36,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Vtec\\Crud\\": "src"
+            "Okami101\\LaravelVuetifyAdmin\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Vtec\\Crud\\Tests\\": "tests"
+            "Okami101\\LaravelVuetifyAdmin\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -57,7 +55,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Vtec\\Crud\\CrudServiceProvider"
+                "Okami101\\LaravelVuetifyAdmin\\AdminServiceProvider"
             ]
         }
     },
