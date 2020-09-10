@@ -1,11 +1,11 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin\Commands;
+namespace Okami101\LaravelAdmin\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Okami101\LaravelVuetifyAdmin\AdminServiceProvider;
+use Okami101\LaravelAdmin\AdminServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\Process\Process;
 
@@ -198,7 +198,7 @@ class InstallCommand extends Command
                         0,
                         <<<EOF
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Okami101\LaravelVuetifyAdmin\Http\Middleware\Impersonate::class,
+            \Okami101\LaravelAdmin\Http\Middleware\Impersonate::class,
 
 EOF
                     );

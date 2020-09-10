@@ -1,6 +1,6 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin\Faker\Provider;
+namespace Okami101\LaravelAdmin\Faker\Provider;
 
 use Faker\Generator;
 use Faker\Provider\Base;

@@ -1,7 +1,7 @@
-# Laravel Vuetify Admin
+# Laravel Admin
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/okami101/laravel-vuetify-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-vuetify-admin)
-[![License](https://img.shields.io/packagist/l/okami101/laravel-vuetify-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-vuetify-admin)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/okami101/laravel-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-admin)
+[![License](https://img.shields.io/packagist/l/okami101/laravel-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-admin)
 
 Admin Crud resource builder for Laravel 7, from backend API to UI with help of [Vuetify Admin](https://github.com/okami101/vuetify-admin), a 100% SPA separated Vue CLI admin panel builder based on Vuetify.
 
@@ -33,7 +33,7 @@ See [dedicated readme](https://github.com/okami101/vuetify-admin#features) of Vu
 ## Install
 
 ```bash
-composer require okami101/laravel-vuetify-admin
+composer require okami101/laravel-admin
 php artisan admin:install
 ```
 

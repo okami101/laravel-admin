@@ -1,6 +1,6 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin;
+namespace Okami101\LaravelAdmin;
 
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +40,7 @@ class AdminRouteMethods
     public function upload()
     {
         return function () {
-            $this->post('upload', '\Okami101\LaravelVuetifyAdmin\Http\Controllers\UploadController@index');
+            $this->post('upload', '\Okami101\LaravelAdmin\Http\Controllers\UploadController@index');
         };
     }
 }

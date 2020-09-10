@@ -1,5 +1,5 @@
 {
-    "name": "okami101/laravel-vuetify-admin",
+    "name": "okami101/laravel-admin",
     "description": "Laravel admin panel generator using Vuetify Admin, a separate SPA admin framework running on top of REST APIs and built on Vuetify.",
     "keywords": [
         "laravel",
@@ -36,12 +36,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Okami101\\LaravelVuetifyAdmin\\": "src"
+            "Okami101\\LaravelAdmin\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Okami101\\LaravelVuetifyAdmin\\Tests\\": "tests"
+            "Okami101\\LaravelAdmin\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -55,7 +55,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Okami101\\LaravelVuetifyAdmin\\AdminServiceProvider"
+                "Okami101\\LaravelAdmin\\AdminServiceProvider"
             ]
         }
     },

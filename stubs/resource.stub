@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Okami101\LaravelVuetifyAdmin\Http\Resources\BaseResource;
+use Okami101\LaravelAdmin\Http\Resources\BaseResource;
 
 class {{ model }} extends BaseResource
 {

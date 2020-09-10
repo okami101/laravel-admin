@@ -1,6 +1,6 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin\Commands;
+namespace Okami101\LaravelAdmin\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

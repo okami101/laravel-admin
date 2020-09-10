@@ -1,6 +1,6 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin\Traits;
+namespace Okami101\LaravelAdmin\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;

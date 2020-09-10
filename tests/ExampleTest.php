@@ -1,6 +1,6 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin\Tests;
+namespace Okami101\LaravelAdmin\Tests;
 
 use PHPUnit\Framework\TestCase;
 

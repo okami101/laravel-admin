@@ -8,7 +8,7 @@ use App\Http\Requests\Update{{ model }};
 use App\Http\Resources\{{ model }} as {{ model }}Resource;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
-use Okami101\LaravelVuetifyAdmin\Filters\SearchFilter;
+use Okami101\LaravelAdmin\Filters\SearchFilter;
 
 class {{ class }} extends Controller
 {

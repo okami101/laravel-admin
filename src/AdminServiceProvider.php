@@ -1,17 +1,17 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin;
+namespace Okami101\LaravelAdmin;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Okami101\LaravelVuetifyAdmin\Commands\CrudMakeCommand;
-use Okami101\LaravelVuetifyAdmin\Commands\CrudYamlCommand;
-use Okami101\LaravelVuetifyAdmin\Commands\InstallCommand;
-use Okami101\LaravelVuetifyAdmin\Commands\UICommand;
-use Okami101\LaravelVuetifyAdmin\Commands\UserCommand;
+use Okami101\LaravelAdmin\Commands\CrudMakeCommand;
+use Okami101\LaravelAdmin\Commands\CrudYamlCommand;
+use Okami101\LaravelAdmin\Commands\InstallCommand;
+use Okami101\LaravelAdmin\Commands\UICommand;
+use Okami101\LaravelAdmin\Commands\UserCommand;
 
 class AdminServiceProvider extends ServiceProvider
 {

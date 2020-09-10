@@ -1,6 +1,6 @@
 <?php
 
-namespace Okami101\LaravelVuetifyAdmin\Http\Controllers;
+namespace Okami101\LaravelAdmin\Http\Controllers;
 
 use Illuminate\Http\Request;
 
