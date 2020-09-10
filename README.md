@@ -32,6 +32,8 @@ See [dedicated readme](https://github.com/okami101/vuetify-admin#features) of Vu
 
 ## Install
 
+Use `composer create-project laravel/laravel my-laravel-admin-app 7.*` to initialize a new Laravel 7 project then :
+
 ```bash
 composer require okami101/laravel-admin
 php artisan admin:install
