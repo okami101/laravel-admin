@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0
+
+* Change repository name
+
 ## v0.2.28
 
 * Fix AccountController stub
