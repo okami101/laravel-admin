@@ -49,7 +49,7 @@ class AdminServiceProvider extends ServiceProvider
             ]);
         }
 
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'crud');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'admin');
         Route::mixin(new AdminRouteMethods);
 
         Validator::extend('current_password', function ($attribute, $value, $parameters, $validator) {
