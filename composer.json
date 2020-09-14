@@ -1,6 +1,6 @@
 {
     "name": "okami101/laravel-admin",
-    "description": "Laravel admin panel generator using Vuetify Admin, a separate SPA admin framework running on top of REST APIs and built on Vuetify.",
+    "description": "Admin panel generator for Laravel 8 and based on Vuetify Admin, a separate SPA admin framework running on top of REST APIs.",
     "keywords": [
         "laravel",
         "crud",
