@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.1
+
+* Fix models stubs at App\Models namespace by default
+
 ## v0.4.0
 
 * Migrate to Laravel 8 & PHP 7.4

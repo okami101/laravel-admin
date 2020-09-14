@@ -31,6 +31,7 @@ class CrudMakeCommand extends GeneratorCommand
     protected $stubs = [
         'Model' => [
             'stub' => 'model',
+            'namespace' => '\Models',
         ],
         'Controller' => [
             'stub' => 'controller',
@@ -173,8 +174,8 @@ class CrudMakeCommand extends GeneratorCommand
      */
     protected function replaceClass($stub, $name)
     {
-        $namespacedModel = $this->rootNamespace().$this->argument('name');
-        $model = class_basename($namespacedModel);
+        $namespaceModel = $this->qualifyModel($this->argument('name'));
+        $model = class_basename($namespaceModel);
         $class = parent::replaceClass($stub, $name);
 
         return str_replace([
@@ -199,7 +200,7 @@ class CrudMakeCommand extends GeneratorCommand
             $this->getArrayString($this->getSortableFields()),
             $this->getArrayString($this->getIncludeFields()),
             $this->getMediaCodeLines($this->getMediaFields()),
-            $namespacedModel,
+            $namespaceModel,
             $model,
             Str::camel($model),
             class_basename($this->userProviderModel()),
@@ -318,7 +319,7 @@ class CrudMakeCommand extends GeneratorCommand
     {
         return collect($array)->map(function ($multiple, $collection) {
             $line = "\$this->addMediaCollection('$collection')";
-            if (! $multiple) {
+            if (! filter_var($multiple, FILTER_VALIDATE_BOOL)) {
                 $line .= '->singleFile()';
             }
 
