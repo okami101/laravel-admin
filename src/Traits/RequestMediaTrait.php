@@ -3,10 +3,10 @@
 namespace Okami101\LaravelAdmin\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\FileAdder\FileAdder;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\MediaCollection\MediaCollection;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\FileAdder;
+use Spatie\MediaLibrary\MediaCollections\MediaCollection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Trait RequestMediaTrait
@@ -15,14 +15,14 @@ use Spatie\MediaLibrary\Models\Media;
  */
 trait RequestMediaTrait
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
 
     /**
      * Auto attach media via request
      */
     public static function bootRequestMediaTrait(): void
     {
-        static::saved(static function (Model $model) {
+        static::saved(static function (self $model) {
             $model->registerMediaCollections();
 
             collect($model->mediaCollections)->each(function (MediaCollection $collection) use ($model) {

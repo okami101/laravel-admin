@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.0
+
+* Migrate to Laravel 8 & PHP 7.4
+
 ## v0.3.0
 
 * Change repository name

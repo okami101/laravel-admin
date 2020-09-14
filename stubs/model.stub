@@ -3,9 +3,9 @@
 namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Translatable\HasTranslations;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Okami101\LaravelAdmin\Traits\RequestMediaTrait;
 
 class {{ class }} extends Model implements HasMedia

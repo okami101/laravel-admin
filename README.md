@@ -3,7 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/okami101/laravel-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-admin)
 [![License](https://img.shields.io/packagist/l/okami101/laravel-admin.svg?style=flat-square)](https://packagist.org/packages/okami101/laravel-admin)
 
-Admin Crud resource builder for Laravel 7, from backend API to UI with help of [Vuetify Admin](https://github.com/okami101/vuetify-admin), a 100% SPA separated Vue CLI admin panel builder based on Vuetify.
+Admin Crud resource builder for Laravel 8, from backend API to UI with help of [Vuetify Admin](https://github.com/okami101/vuetify-admin), a 100% SPA separated Vue CLI admin panel builder based on Vuetify.
 
 > See [full documentation](https://www.okami101.io/vuetify-admin)  
 > Check [online demo](https://va-demo.okami101.io) -> go to admin and use pre-filled login (read only)  
@@ -32,7 +32,7 @@ See [dedicated readme](https://github.com/okami101/vuetify-admin#features) of Vu
 
 ## Install
 
-Use `composer create-project laravel/laravel my-laravel-admin-app 7.*` to initialize a new Laravel 7 project then :
+Use `laravel new my-laravel-admin-app` to initialize a new Laravel 8 project then :
 
 ```bash
 composer require okami101/laravel-admin

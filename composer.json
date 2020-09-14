@@ -20,11 +20,11 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "illuminate/routing": "^7.0",
-        "illuminate/support": "^7.0",
-        "illuminate/validation": "^7.0",
-        "spatie/laravel-medialibrary": "^7.0",
+        "php": "^7.4",
+        "illuminate/routing": "^8.0",
+        "illuminate/support": "^8.0",
+        "illuminate/validation": "^8.0",
+        "spatie/laravel-medialibrary": "^8.7",
         "spatie/laravel-query-builder": "^3.0",
         "spatie/laravel-translatable": "^4.3",
         "symfony/yaml": "^5.0"
