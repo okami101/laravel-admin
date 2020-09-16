@@ -156,6 +156,7 @@ class InstallCommand extends Command
             'Spatie\MediaLibrary\MediaLibraryServiceProvider',
             '--tag',
             'config',
+            '--tag',
             'migrations',
         ]);
     }
