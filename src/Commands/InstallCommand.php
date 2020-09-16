@@ -50,19 +50,25 @@ class InstallCommand extends Command
         /**
          * Composer dependencies
          */
-        $dependencies[] = 'laravel/ui';
-        $devDependencies[] = 'laracasts/generators';
+        $dependencies = ['laravel/ui', 'spatie/laravel-query-builder'];
+        $devDependencies = ['laracasts/generators'];
 
+        if ($this->confirm('Install spatie/laravel-translatable to provide database models translation ?', true)) {
+            $dependencies[] = 'spatie/laravel-translatable';
+        }
+        if ($installLaravelMediaLibrary = $this->confirm('Install spatie/laravel-medialibrary to provide database file management ?', true)) {
+            $dependencies[] = 'spatie/laravel-medialibrary';
+        }
         if ($installLaravelSanctum = $this->confirm('Install laravel/sanctum to provide SPA authentication (required if you choose sanctum provider) ?', true)) {
             $dependencies[] = 'laravel/sanctum';
         }
         if ($installLaravelElfinder = $this->confirm('Install barryvdh/laravel-elfinder to provide an admin interface for File Management ?', true)) {
             $dependencies[] = 'barryvdh/laravel-elfinder';
         }
-        if ($installLaravelClockwork = $this->confirm('Install itsgoingd/clockwork to provide debugging and profiling ?', true)) {
+        if ($this->confirm('Install itsgoingd/clockwork to provide debugging and profiling ?', true)) {
             $dependencies[] = 'itsgoingd/clockwork';
         }
-        if ($installLaravelIdeHelper = $this->confirm('Install beyondcode/laravel-dump-server to provide dump server for API ?', true)) {
+        if ($this->confirm('Install beyondcode/laravel-dump-server to provide dump server for API ?', true)) {
             $devDependencies[] = 'beyondcode/laravel-dump-server';
         }
         if ($installLaravelIdeHelper = $this->confirm('Install barryvdh/laravel-ide-helper to provide full autocompletion ?', true)) {
@@ -86,6 +92,13 @@ class InstallCommand extends Command
         /**
          * Specific per-package preconfiguration
          */
+        if ($installLaravelMediaLibrary) {
+            $this->call('vendor:publish', [
+                '--provider' => MediaLibraryServiceProvider::class,
+                '--tag' => ['config', 'migrations'],
+            ]);
+        }
+
         if ($installLaravelSanctum) {
             $this->configureLaravelSanctum();
         }
@@ -113,11 +126,6 @@ class InstallCommand extends Command
         /**
          * Auto included package publish
          */
-        $this->call('vendor:publish', [
-            '--provider' => MediaLibraryServiceProvider::class,
-            '--tag' => ['config', 'migrations'],
-        ]);
-
         $this->call('vendor:publish', [
             '--provider' => AdminServiceProvider::class,
             '--tag' => 'config',

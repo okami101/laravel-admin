@@ -20,19 +20,30 @@
         }
     ],
     "require": {
-        "php": "^7.4",
-        "illuminate/routing": "^8.0",
-        "illuminate/support": "^8.0",
-        "illuminate/validation": "^8.0",
-        "spatie/laravel-medialibrary": "^8.7",
-        "spatie/laravel-query-builder": "^3.0",
-        "spatie/laravel-translatable": "^4.3",
+        "php": "^7.3",
+        "illuminate/routing": "^6.0|^7.0|^8.0",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "illuminate/validation": "^6.0|^7.0|^8.0",
         "symfony/yaml": "^5.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "fzaninotto/faker": "^1.9",
+        "spatie/laravel-medialibrary": "^8.7",
+        "spatie/laravel-query-builder": "^3.0",
+        "spatie/laravel-translatable": "^4.3",
         "phpunit/phpunit": "^9.0"
+    },
+    "suggest": {
+        "barryvdh/laravel-elfinder": "File manager interface with Wysiwyg bridges",
+        "barryvdh/laravel-ide-helper": "For advanced IDE integration",
+        "beyondcode/laravel-dump-server": "Dump through console, perfect for API development",
+        "friendsofphp/php-cs-fixer": "For coding style",
+        "itsgoingd/clockwork": "For advanced in-browser app profiling",
+        "laravel/sanctum": "For full state SPA authentication",
+        "spatie/laravel-medialibrary": "For centralized file media management",
+        "spatie/laravel-query-builder": "For easy resources pagination and filtering through an API",
+        "spatie/laravel-translatable": "For easy translation via JSON based database column field"
     },
     "autoload": {
         "psr-4": {

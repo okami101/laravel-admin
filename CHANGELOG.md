@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.2
+
+* Remove hard Spatie dependencies and move to suggests
+
 ## v0.4.1
 
 * Fix models stubs at App\Models namespace by default
