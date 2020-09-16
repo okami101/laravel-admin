@@ -202,7 +202,6 @@ class InstallCommand extends Command
          * Add web and api routes
          */
         $this->files->copy(__DIR__ . '/../../stubs/routes/api.stub', base_path('routes/api.php'));
-        $this->files->copy(__DIR__ . '/../../stubs/routes/web.stub', base_path('routes/web.php'));
     }
 
     private function configureLaravelSanctum()
