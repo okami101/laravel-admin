@@ -40,6 +40,7 @@
         "beyondcode/laravel-dump-server": "Dump through console, perfect for API development",
         "friendsofphp/php-cs-fixer": "For coding style",
         "itsgoingd/clockwork": "For advanced in-browser app profiling",
+        "laravel/fortify": "Frontend agnostic authentication",
         "laravel/sanctum": "For full state SPA authentication",
         "spatie/laravel-medialibrary": "For centralized file media management",
         "spatie/laravel-query-builder": "For easy resources pagination and filtering through an API",

@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.4.3
+
+* Switch to Laravel Fortify
+
 ## v0.4.2
 
 * Remove hard Spatie dependencies and move to suggests

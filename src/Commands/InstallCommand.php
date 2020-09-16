@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Okami101\LaravelAdmin\AdminServiceProvider;
-use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
@@ -50,7 +49,7 @@ class InstallCommand extends Command
         /**
          * Composer dependencies
          */
-        $dependencies = ['laravel/ui', 'spatie/laravel-query-builder'];
+        $dependencies = ['laravel/fortify', 'spatie/laravel-query-builder'];
         $devDependencies = ['laracasts/generators'];
 
         if ($this->confirm('Install spatie/laravel-translatable to provide database models translation ?', true)) {
@@ -85,18 +84,15 @@ class InstallCommand extends Command
         $this->executeCommand(['composer', 'update']);
 
         /**
-         * Laravel UI auth controllers
+         * Enable Laravel Fortify features
          */
-        $this->executeCommand(['php', 'artisan', 'ui:controllers']);
+        $this->configureFortify();
 
         /**
          * Specific per-package preconfiguration
          */
         if ($installLaravelMediaLibrary) {
-            $this->call('vendor:publish', [
-                '--provider' => MediaLibraryServiceProvider::class,
-                '--tag' => ['config', 'migrations'],
-            ]);
+            $this->configureMediaLibrary();
         }
 
         if ($installLaravelSanctum) {
@@ -143,6 +139,25 @@ class InstallCommand extends Command
          * Vue CLI Plugin install from preset
          */
         $this->call(UICommand::class);
+    }
+
+    private function configureFortify()
+    {
+        $this->executeCommand(['php', 'artisan', 'vendor:publish', '--provider', 'Laravel\Fortify\FortifyServiceProvider']);
+    }
+
+    private function configureMediaLibrary()
+    {
+        $this->executeCommand([
+            'php',
+            'artisan',
+            'vendor:publish',
+            '--provider',
+            'Spatie\MediaLibrary\MediaLibraryServiceProvider',
+            '--tag',
+            'config',
+            'migrations',
+        ]);
     }
 
     /**
