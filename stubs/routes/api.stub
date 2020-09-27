@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
      * API resources controllers
      */
     Route::apiResources([
-        'users' => 'UserController',
+        'users' => 'App\Http\Controllers\UserController',
         //
     ]);
 });

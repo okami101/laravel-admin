@@ -394,7 +394,7 @@ class CrudMakeCommand extends GeneratorCommand
     {
         $model = class_basename($this->argument('name'));
         $slug = Str::snake(Str::pluralStudly($model));
-        $code = "'$slug' => '{$model}Controller'";
+        $code = "'$slug' => 'App\Http\Controllers\{$model}Controller'";
 
         $routeFile = base_path('routes/api.php');
         if (Str::contains($this->files->get($routeFile), $code)) {
