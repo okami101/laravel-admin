@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.0
+
+* Enhanced Laravel Fortify integration
+
 ## v0.4.3
 
 * Switch to Laravel Fortify

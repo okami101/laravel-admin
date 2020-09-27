@@ -52,18 +52,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'admin');
         Route::mixin(new AdminRouteMethods);
 
-        Validator::extend('current_password', function ($attribute, $value, $parameters, $validator) {
-            return Hash::check($value, auth()->user()->password);
-        }, __('admin::validation.mismatch_password'));
-
-        Validator::extend('strong_password', function ($attribute, $value, $parameters, $validator) {
-            if (! config('app.debug')) {
-                return preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', (string) $value);
-            }
-
-            return true;
-        }, __('admin::validation.strong_password'));
-
         Builder::macro('exportOrPaginate', function () {
             if (request()->get('perPage')) {
                 return $this

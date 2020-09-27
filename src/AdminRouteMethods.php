@@ -18,8 +18,6 @@ class AdminRouteMethods
     {
         return function () {
             $this->get('user', 'AccountController@index');
-            $this->patch('account/update', 'AccountController@update')->name('account.update');
-            $this->patch('account/password', 'AccountController@password')->name('account.password');
         };
     }
 

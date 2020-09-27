@@ -91,12 +91,12 @@ class InstallCommand extends Command
         /**
          * Specific per-package preconfiguration
          */
-        if ($installLaravelMediaLibrary) {
-            $this->configureMediaLibrary();
-        }
-
         if ($installLaravelSanctum) {
             $this->configureLaravelSanctum();
+        }
+
+        if ($installLaravelMediaLibrary) {
+            $this->configureMediaLibrary();
         }
 
         if ($installLaravelElfinder) {
@@ -143,11 +143,61 @@ class InstallCommand extends Command
 
     private function configureFortify()
     {
+        $this->line('Configure Laravel Fortify');
+
         $this->executeCommand(['php', 'artisan', 'vendor:publish', '--provider', 'Laravel\Fortify\FortifyServiceProvider']);
+
+        /**
+         * Register service provider inside app
+         */
+        $this->insertCode(config_path('app.php'), 'FortifyServiceProvider', 'RouteServiceProvider', <<<EOF
+        App\Providers\FortifyServiceProvider::class,
+
+EOF
+        );
+    }
+
+    private function configureLaravelSanctum()
+    {
+        $this->line('Configure Laravel Sanctum');
+
+        /**
+         * Insert middlewares inside HTTP Kernel
+         */
+        $this->insertCode(app_path('Http/Kernel.php'), 'EnsureFrontendRequestsAreStateful', 'api', <<<EOF
+        \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+        \Okami101\LaravelAdmin\Http\Middleware\Impersonate::class,
+
+EOF
+        );
+    }
+
+    private function insertCode($file, $checker, $search, $code) {
+        if (Str::contains($this->files->get($file), $checker)) {
+            return;
+        }
+
+        $lines = file($file);
+
+        foreach ($lines as $lineNumber => $line) {
+            if (strpos($line, $search) !== false) {
+                array_splice(
+                    $lines,
+                    $lineNumber + 1,
+                    0,
+                    $code
+                );
+
+                break;
+            }
+        }
+        $this->files->replace($file, $lines);
     }
 
     private function configureMediaLibrary()
     {
+        $this->line('Configure Spatie Media Library');
+
         $this->executeCommand([
             'php',
             'artisan',
@@ -203,34 +253,6 @@ class InstallCommand extends Command
          * Add web and api routes
          */
         $this->files->copy(__DIR__ . '/../../stubs/routes/api.stub', base_path('routes/api.php'));
-    }
-
-    private function configureLaravelSanctum()
-    {
-        $this->line('Configure Laravel Sanctum');
-
-        $kernel = app_path('Http/Kernel.php');
-
-        if (! Str::contains($this->files->get($kernel), 'EnsureFrontendRequestsAreStateful')) {
-            $lines = file($kernel);
-            foreach ($lines as $lineNumber => $line) {
-                if (strpos($line, 'api') !== false) {
-                    array_splice(
-                        $lines,
-                        $lineNumber + 1,
-                        0,
-                        <<<EOF
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Okami101\LaravelAdmin\Http\Middleware\Impersonate::class,
-
-EOF
-                    );
-
-                    break;
-                }
-            }
-            $this->files->replace($kernel, $lines);
-        }
     }
 
     private function configureLaravelElfinder()

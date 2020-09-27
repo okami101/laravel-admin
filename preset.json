@@ -31,14 +31,14 @@
             "locale": "en"
         },
         "vue-cli-plugin-vuetify-admin": {
+            "apiURL": "http://localhost:8000",
             "dataProvider": "laravel",
             "authProvider": "sanctum",
-            "apiURL": "http://localhost:8000",
-            "locales": ["en", "fr"],
-            "profile": true,
+            "auth": ["register", "reset", "profile"],
             "users": true,
             "impersonation": true,
-            "material": true
+            "material": true,
+            "locales": ["en", "fr"]
         }
     },
     "cssPreprocessor": "dart-sass",
