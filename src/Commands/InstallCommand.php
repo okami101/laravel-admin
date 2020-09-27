@@ -150,7 +150,11 @@ class InstallCommand extends Command
         /**
          * Register service provider inside app
          */
-        $this->insertCode(config_path('app.php'), 'FortifyServiceProvider', 'RouteServiceProvider', <<<EOF
+        $this->insertCode(
+            config_path('app.php'),
+            'FortifyServiceProvider',
+            'RouteServiceProvider',
+            <<<EOF
         App\Providers\FortifyServiceProvider::class,
 
 EOF
@@ -164,7 +168,11 @@ EOF
         /**
          * Insert middlewares inside HTTP Kernel
          */
-        $this->insertCode(app_path('Http/Kernel.php'), 'EnsureFrontendRequestsAreStateful', 'api', <<<EOF
+        $this->insertCode(
+            app_path('Http/Kernel.php'),
+            'EnsureFrontendRequestsAreStateful',
+            'api',
+            <<<EOF
         \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         \Okami101\LaravelAdmin\Http\Middleware\Impersonate::class,
 
@@ -172,7 +180,8 @@ EOF
         );
     }
 
-    private function insertCode($file, $checker, $search, $code) {
+    private function insertCode($file, $checker, $search, $code)
+    {
         if (Str::contains($this->files->get($file), $checker)) {
             return;
         }

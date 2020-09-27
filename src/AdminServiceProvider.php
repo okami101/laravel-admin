@@ -3,9 +3,7 @@
 namespace Okami101\LaravelAdmin;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Okami101\LaravelAdmin\Commands\CrudMakeCommand;
 use Okami101\LaravelAdmin\Commands\CrudYamlCommand;
