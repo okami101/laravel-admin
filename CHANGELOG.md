@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.5.1
+## v0.5.3
 
 * Explicit CSRF sanctum not required
 
