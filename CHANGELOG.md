@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.1
+
+* Explicit CSRF sanctum not required
+
 ## v0.5.0
 
 * Enhanced Laravel Fortify integration
