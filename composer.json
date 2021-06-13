@@ -1,5 +1,5 @@
 {
-    "name": "okami101/laravel-admin",
+    "name": "morcen/laravel-admin",
     "description": "Admin panel generator for Laravel 8 and based on Vuetify Admin, a separate SPA admin framework running on top of REST APIs.",
     "keywords": [
         "laravel",
@@ -17,7 +17,7 @@
         {
             "name": "Adrien Beaudouin",
             "email": "adrien.beaudouin@outlook.com"
-        }
+        },
     ],
     "require": {
         "php": "^7.3|^8.0",
