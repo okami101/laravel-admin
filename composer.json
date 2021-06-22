@@ -1,5 +1,5 @@
 {
-    "name": "morcen/laravel-admin",
+    "name": "okami101/laravel-admin",
     "description": "Admin panel generator for Laravel 8 and based on Vuetify Admin, a separate SPA admin framework running on top of REST APIs.",
     "keywords": [
         "laravel",
